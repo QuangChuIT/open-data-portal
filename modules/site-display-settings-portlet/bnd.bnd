@@ -1,0 +1,4 @@
+Bundle-Name: site-display-settings-portlet
+Bundle-SymbolicName: site.display.settings.portlet
+Bundle-Version: 1.0.0
+Export-Package: site.display.settings.portlet.constants

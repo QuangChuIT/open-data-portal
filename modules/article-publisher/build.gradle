@@ -1,0 +1,22 @@
+dependencies {
+    compileOnly group: "com.liferay.portal", name: "release.portal.api"
+
+    cssBuilder group: "com.liferay", name: "com.liferay.css.builder", version: "3.0.2"
+
+    compileOnly group: 'commons-codec', name: 'commons-codec', version: '1.10'
+
+    compileOnly group: 'net.spy', name: 'spymemcached', version: '2.12.3'
+
+    compileOnly group: 'com.codahale.metrics', name: 'metrics-core', version: '3.0.0'
+
+    compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib.soy",
+            version: "1.0.10"
+
+    compileOnly group: "com.liferay", name: "com.liferay.frontend.taglib.clay",
+            version: "1.0.0"
+
+    compile group: "biz.aQute.bnd", name: "biz.aQute.bndlib", version: "3.1.0"
+
+    compileOnly "com.liferay:com.liferay.portal.configuration.metatype.api"
+    compileOnly 'com.liferay.portal:release.portal.api'
+}

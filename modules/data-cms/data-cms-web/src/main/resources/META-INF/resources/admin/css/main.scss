@@ -1,0 +1,45 @@
+.drag-area {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+
+  .icon {
+    font-size: 50px;
+    color: #5256ad;
+  }
+
+  header {
+    font-weight: 500;
+  }
+
+  span {
+    font-weight: 500;
+    margin: 10px 0 10px 0;
+  }
+
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+}
+
+.drag-active {
+  background-color: lightblue;
+}
+
+.categories-selector {
+  .text-secondary {
+    display: none;
+  }
+
+  .sheet-subtitle {
+    display: none;
+  }
+
+  .text-secondary {
+    display: none;
+  }
+}

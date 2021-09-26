@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="vn.vnpt.data.cms.model.Catalog">
+		<field name="uuid" type="String" />
+		<field name="catalogId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="tableName" type="String" />
+		<field localized="true" name="title" type="String" />
+		<field localized="true" name="description" type="String" />
+		<field name="version" type="String" />
+		<field name="visibility" type="boolean" />
+		<field name="catType" type="int" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
+	</model>
+	<model name="vn.vnpt.data.cms.model.CatalogFieldName">
+		<field name="uuid" type="String" />
+		<field name="entryId" type="long" />
+		<field name="code" type="String" />
+		<field localized="true" name="name" type="String" />
+		<field name="dataType" type="String" />
+		<field name="format" type="String" />
+		<field name="defaultValue" type="String" />
+		<field name="notNull" type="boolean" />
+		<field name="hiddenStatus" type="boolean" />
+		<field name="isSearch" type="boolean" />
+		<field name="catalogId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
+	</model>
+	<model name="vn.vnpt.data.cms.model.DicDataType">
+		<field name="uuid" type="String" />
+		<field name="dicDataTypeId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
+		<field name="name" type="String" />
+		<field name="code" type="String" />
+		<field name="length" type="int" />
+	</model>
+</model-hints>

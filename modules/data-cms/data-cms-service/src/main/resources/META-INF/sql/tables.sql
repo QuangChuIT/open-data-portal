@@ -1,0 +1,62 @@
+create table VNPT_Catalog (
+	uuid_ VARCHAR(75) null,
+	catalogId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	tableName VARCHAR(75) null,
+	title STRING null,
+	description STRING null,
+	version VARCHAR(75) null,
+	visibility BOOLEAN,
+	catType INTEGER,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
+);
+
+create table VNPT_CatalogFieldName (
+	uuid_ VARCHAR(75) null,
+	entryId LONG not null primary key,
+	code_ VARCHAR(75) null,
+	name STRING null,
+	dataType VARCHAR(75) null,
+	format VARCHAR(75) null,
+	defaultValue VARCHAR(75) null,
+	notNull BOOLEAN,
+	hiddenStatus BOOLEAN,
+	isSearch BOOLEAN,
+	catalogId LONG,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null
+);
+
+create table VNPT_DicDataType (
+	uuid_ VARCHAR(75) null,
+	dicDataTypeId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	status INTEGER,
+	statusByUserId LONG,
+	statusByUserName VARCHAR(75) null,
+	statusDate DATE null,
+	name VARCHAR(75) null,
+	code_ VARCHAR(75) null,
+	length INTEGER
+);

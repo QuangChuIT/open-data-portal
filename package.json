@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "generator-liferay-js": "^2.26.0",
+    "generator-liferay-theme": "^10.1.0"
+  }
+}

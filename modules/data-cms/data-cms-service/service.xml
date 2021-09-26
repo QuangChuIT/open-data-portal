@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.3.0//EN"
+        "http://www.liferay.com/dtd/liferay-service-builder_7_3_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="vn.vnpt.data.cms">
+    <author>vnpt</author>
+    <namespace>VNPT</namespace>
+
+    <entity local-service="true" name="Catalog" remote-service="true" uuid="true">
+
+        <!-- PK fields -->
+
+        <column name="catalogId" primary="true" type="long"/>
+
+        <!-- Group instance -->
+
+        <column name="groupId" type="long"/>
+        <column name="companyId" type="long"/>
+
+        <!-- Audit fields -->
+
+        <column name="userId" type="long"/>
+        <column name="userName" type="String"/>
+        <column name="createDate" type="Date"/>
+        <column name="modifiedDate" type="Date"/>
+
+        <!-- Other fields -->
+
+        <column name="tableName" type="String"/>
+        <column name="title" type="String" localized="true"/>
+        <column name="description" type="String" localized="true"/>
+        <column name="version" type="String"/>
+        <column name="visibility" type="boolean"/>
+        <column name="catType" type="int"/>
+
+        <!--Status fields -->
+
+        <column name="status" type="int"/>
+        <column name="statusByUserId" type="long"/>
+        <column name="statusByUserName" type="String"/>
+        <column name="statusDate" type="Date"/>
+
+        <!-- Order -->
+
+        <order>
+            <order-column name="catalogId" order-by="desc"/>
+            <order-column name="createDate" order-by="desc"/>
+        </order>
+
+        <!-- Finder methods -->
+
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"/>
+        </finder>
+
+        <!-- References -->
+
+        <reference entity="AssetEntry" package-path="com.liferay.portlet.asset"/>
+        <reference entity="AssetTag" package-path="com.liferay.portlet.asset"/>
+    </entity>
+
+    <entity name="CatalogFieldName" local-service="true" remote-service="true" uuid="true">
+        <!--Catalog Field Name Fields -->
+        <column name="entryId" type="long" primary="true"/>
+        <column name="code" type="String"/>
+        <column name="name" type="String" localized="true"/>
+        <column name="dataType" type="String"/>
+        <column name="format" type="String"/>
+        <column name="defaultValue" type="String"/>
+        <column name="notNull" type="boolean"/>
+        <column name="hiddenStatus" type="boolean"/>
+        <column name="isSearch" type="boolean"/>
+        <column name="catalogId" type="long"/>
+
+        <!-- Group instance -->
+
+        <column name="groupId" type="long"/>
+        <column name="companyId" type="long"/>
+
+        <!-- Audit fields -->
+
+        <column name="userId" type="long"/>
+        <column name="userName" type="String"/>
+        <column name="createDate" type="Date"/>
+        <column name="modifiedDate" type="Date"/>
+
+        <!-- Status fields -->
+
+        <column name="status" type="int"/>
+        <column name="statusByUserId" type="long"/>
+        <column name="statusByUserName" type="String"/>
+        <column name="statusDate" type="Date"/>
+
+        <!-- Order -->
+
+        <order>
+            <order-column name="entryId" order-by="asc"/>
+        </order>
+
+        <!-- Finder -->
+
+        <finder name="CatalogId" return-type="Collection">
+            <finder-column name="catalogId"/>
+        </finder>
+
+        <finder name="G_C" return-type="Collection">
+            <finder-column name="groupId"/>
+            <finder-column name="catalogId"/>
+        </finder>
+
+        <finder name="G_C_S" return-type="Collection">
+            <finder-column name="groupId"/>
+            <finder-column name="catalogId"/>
+            <finder-column name="hiddenStatus"/>
+        </finder>
+
+        <finder name="G_C_H" return-type="Collection">
+            <finder-column name="groupId"/>
+            <finder-column name="catalogId"/>
+            <finder-column name="isSearch"/>
+        </finder>
+    </entity>
+
+    <entity name="DicDataType" local-service="true" remote-service="true" uuid="true">
+        <!-- DicDataType Fields -->
+        <column name="dicDataTypeId" type="long" primary="true"/>
+
+        <!-- Group instance -->
+
+        <column name="groupId" type="long"/>
+        <column name="companyId" type="long"/>
+
+        <!-- Audit fields -->
+
+        <column name="userId" type="long"/>
+        <column name="userName" type="String"/>
+        <column name="createDate" type="Date"/>
+        <column name="modifiedDate" type="Date"/>
+
+        <!-- Status fields -->
+
+        <column name="status" type="int"/>
+        <column name="statusByUserId" type="long"/>
+        <column name="statusByUserName" type="String"/>
+        <column name="statusDate" type="Date"/>
+
+        <!-- Other fields -->
+        <column name="name" type="String"/>
+        <column name="code" type="String"/>
+        <column name="length" type="int"/>
+
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"/>
+        </finder>
+    </entity>
+    <exceptions>
+        <exception>CatalogTableName</exception>
+        <exception>CatalogTile</exception>
+        <exception>CatFieldName</exception>
+        <exception>CatDataType</exception>
+        <exception>DicDataTypeName</exception>
+        <exception>DicDataTypeCode</exception>
+    </exceptions>
+</service-builder>

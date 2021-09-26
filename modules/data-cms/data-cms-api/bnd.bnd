@@ -1,0 +1,12 @@
+Bundle-Name: data-cms-api
+Bundle-SymbolicName: vn.vnpt.data.cms.api
+Bundle-Version: 1.0.0
+Export-Package: \
+    	vn.vnpt.data.cms.exception,\
+    	vn.vnpt.data.cms.model,\
+    	vn.vnpt.data.cms.service,\
+    	vn.vnpt.data.cms.service.persistence,\
+        vn.vnpt.data.cms.util.comparator,\
+        vn.vnpt.data.cms.contansts
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../data-cms-service/service.xml

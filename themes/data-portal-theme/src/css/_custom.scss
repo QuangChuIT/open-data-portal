@@ -1,0 +1,88 @@
+@import 'components/breadcrumb';
+@import 'components/group-item';
+@import 'components/sidebar';
+@import 'components/splitter';
+@import 'components/table';
+@import 'portlet/portlet';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap');
+
+body {
+  background-color: $bg-color;
+  font-family: Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+  Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+  .user-avatar-link {
+    position: relative;
+
+    .panel-notifications-count {
+      margin: 0;
+      position: absolute;
+      right: calc(100% - 0.7rem);
+      top: -0.4rem;
+    }
+  }
+}
+
+.modal-open .modal {
+  overflow-y: hidden !important;
+}
+
+#wrapper {
+  padding: 0;
+
+  .portlet-layout {
+    margin: 0 0 25px;
+
+    .portlet-column {
+      padding: 0;
+    }
+
+    .portlet-body .container-fluid-1280 {
+      max-width: map-get($container-max-widths, xl);
+      position: relative;
+    }
+  }
+
+  .main-content-card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    min-height: 200px;
+  }
+
+  .main-content-nav {
+    margin-left: -($grid-gutter-width / 2);
+    margin-top: 20px;
+  }
+}
+
+.card-page-item-asset {
+  min-width: 193px;
+}
+
+/*
+.product-menu .panel .panel-body {
+  background-color: #21716a;
+}
+
+.product-menu .panel .list-group-heading.active,
+.product-menu .panel .list-group-heading.active:hover,
+.product-menu .panel .list-group-heading.active:focus {
+  background-color: #21716a;
+}
+
+.product-menu .panel .list-group-heading.active + div {
+  background-color: #21716a;
+}
+
+.product-menu .panel .panel-header .panel-title > .panel-toggler:not(.collapsed),
+.product-menu .panel .panel-heading .panel-title > .panel-toggler:not(.collapsed) {
+  background-color: #2e837b;
+}
+
+.product-menu.sidebar-header {
+  background-color: #2e837b
+}
+
+#content-wrapper .control-menu-level-1{
+  background-color: #2e837b
+}*/

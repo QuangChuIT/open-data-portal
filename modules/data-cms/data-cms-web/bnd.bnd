@@ -1,0 +1,5 @@
+Bundle-Name: data-cms-web
+Bundle-SymbolicName: vn.vnpt.data.cms.web.internal
+Bundle-Version: 1.0.0
+Export-Package: vn.vnpt.data.cms.web.internal.constants
+Web-ContextPath: /data-cms

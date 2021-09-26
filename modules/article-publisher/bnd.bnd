@@ -1,0 +1,10 @@
+Bundle-Name: article-publisher
+Bundle-SymbolicName: vn.vnpt.portlet.article.publisher
+Bundle-Version: 1.0.0
+Export-Package: vn.vnpt.portlet.article.publisher.constants
+Private-Package: net.spy.memcached.*
+Import-Package:\
+    !com.codahale.metrics.*,\
+    \
+    *
+Web-ContextPath: /article-publisher-portlet
