@@ -9,6 +9,7 @@ import vn.vnpt.cms.api.cmd.DbExportFileCmd;
 import vn.vnpt.cms.api.config.CoreConfig;
 import vn.vnpt.cms.api.constants.ExportType;
 import vn.vnpt.cms.api.controller.base.AbsApiBaseParamReqTypeCmd;
+import vn.vnpt.cms.api.kernel.util.CSVUtil;
 import vn.vnpt.cms.api.kernel.util.DateTimeUtil;
 import vn.vnpt.cms.api.kernel.util.ExportPDFUtils;
 import vn.vnpt.cms.api.listener.entities.Column;
@@ -107,7 +108,7 @@ public class SourceDataExportCmd extends AbsApiBaseParamReqTypeCmd {
                 if (dataExport.isEmpty()) {
                     this.objResponse = new BaseResp(ResultCode.NO_DATA);
                 } else {
-                    String[][] body = new String[dataExport.size()][dataExport.isEmpty() ? 0 : dataExport.get(0).size()];
+                    String[][] body = new String[dataExport.size()][dataExport.get(0).size()];
 
                     for (int i = 0; i < dataExport.size(); ++i) {
                         for (int j = 0; j < dataExport.get(i).size(); ++j) {
@@ -118,53 +119,13 @@ public class SourceDataExportCmd extends AbsApiBaseParamReqTypeCmd {
                     ExportPDFUtils.createSamplePDF(headers, body, this.fileTemp);
                 }
             } else {
-                XSSFWorkbook workbook = new XSSFWorkbook();
-                Map<String, CellStyle> styles = createStyles(workbook);
-                XSSFCellStyle cellStyle = workbook.createCellStyle();
-                cellStyle.setAlignment(HorizontalAlignment.CENTER);
-                cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
-                XSSFFont headerFont = workbook.createFont();
-                cellStyle.setFillForegroundColor(IndexedColors.LIGHT_CORNFLOWER_BLUE.getIndex());
-                cellStyle.setFillPattern(FillPatternType.NO_FILL);
-                headerFont.setBold(true);
-                headerFont.setFontHeightInPoints((short) 12);
-                cellStyle.setFont(headerFont);
-                XSSFSheet sheet = workbook.createSheet("EXPORT_DATA");
-                Row row = sheet.createRow(0);
-                Cell cell = row.createCell(0, CellType.STRING);
-                cell.setCellValue("STT");
-                cell.setCellStyle(styles.get("header"));
+                this.fileTemp = CoreConfig.TEMP_DIR + name + "_" + DateTimeUtil.formatDate(new Date(), CoreConfig.API_DATE_TIME_INPUT_FORMAT) + ".csv";
+                String[] headers = new String[columnNames.size()];
 
-                int index;
-                for (index = 1; index < columnNames.size() + 1; ++index) {
-                    Column column = columnNames.get(index - 1);
-                    sheet.setColumnWidth(index, column.getName().length() * 256);
-                    Cell c = row.createCell(index, CellType.STRING);
-                    c.setCellValue(column.getName());
-                    c.setCellStyle(styles.get("header"));
+                for (int i = 0; i < columnNames.size(); ++i) {
+                    headers[i] = columnNames.get(i).getName();
                 }
-
-                index = 1;
-
-                for (Iterator<List<String>> iterator = dataExport.iterator(); iterator.hasNext(); ++index) {
-                    List<String> rowData = (List) iterator.next();
-                    Row r = sheet.createRow(index);
-                    Cell cStt = r.createCell(0, CellType.STRING);
-                    cStt.setCellValue(index);
-                    cStt.setCellStyle(styles.get("cell"));
-
-                    for (int i = 1; i < rowData.size() + 1; ++i) {
-                        Cell c = r.createCell(i, CellType.STRING);
-                        c.setCellValue(rowData.get(i - 1));
-                        c.setCellStyle(styles.get("cell"));
-                    }
-                }
-
-                File file = new File(CoreConfig.TEMP_DIR + this.fileTemp);
-                file.getParentFile().mkdirs();
-                FileOutputStream out = new FileOutputStream(file);
-                workbook.write(out);
-                this.fileTemp = CoreConfig.TEMP_DIR + this.fileTemp;
+                CSVUtil.export(headers, dataExport, this.fileTemp);
             }
         }
     }

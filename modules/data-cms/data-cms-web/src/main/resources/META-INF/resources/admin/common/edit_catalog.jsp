@@ -121,10 +121,6 @@
             <%=LanguageUtil.get(request, "add-new-catalog")%>
         </button>
         <aui:button href="<%= redirect %>" type="cancel"/>
-        <button class="btn btn-primary" type="button" id="btnTest" onclick="saveData()">
-            <i class="icon-plus" aria-hidden="true"></i>
-            <%=LanguageUtil.get(request, "add-new-catalog")%>
-        </button>
     </aui:button-row>
 
 </aui:form>

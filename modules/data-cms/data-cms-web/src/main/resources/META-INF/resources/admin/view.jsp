@@ -43,12 +43,12 @@
                         name="cat-table-name"
                         value="<%= catalog.getTableName() %>"
                 />
-                <liferay-ui:search-container-column-text
+                <%--<liferay-ui:search-container-column-text
                         cssClass="table-cell-expand table-cell-minw-200 table-title"
                         href="<%= rowURL %>"
                         name="cat-description"
                         value="<%= HtmlUtil.escape(catalog.getDescription()) %>"
-                />
+                />--%>
                 <liferay-ui:search-container-column-text
                         cssClass="table-cell-expand table-cell-minw-200 table-title"
                         href="<%= rowURL %>"

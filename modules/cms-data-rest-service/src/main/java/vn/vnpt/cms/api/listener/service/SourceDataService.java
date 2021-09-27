@@ -46,8 +46,8 @@ public class SourceDataService extends BaseService {
     @GET
     @Path("greeting")
     public Response greeting() {
-        _log.info("cai cc dit me liferay");
-        return Response.ok("Upload file success !!!!").build();
+        _log.info("Hello source data service !!!!");
+        return Response.ok("This is source data service !!!!").build();
     }
 
     @POST
@@ -140,14 +140,15 @@ public class SourceDataService extends BaseService {
                 byte[] data = Files.readAllBytes(path);
                 output.write(data);
                 output.flush();
-            } catch (Exception var7) {
+            } catch (Exception ex) {
                 throw new WebApplicationException(404);
             }
 
         };
 
         return Response.ok(fileStream, mediaType)
-                .header("Content-Disposition", "attachment; filename = " + fileName).header("charset", "utf-8").build();
+                .header("Content-Disposition", "attachment; filename = " + fileName)
+                .header("charset", "utf-8").build();
     }
 
     private final static Log _log = LogFactoryUtil.getLog(SourceDataService.class);

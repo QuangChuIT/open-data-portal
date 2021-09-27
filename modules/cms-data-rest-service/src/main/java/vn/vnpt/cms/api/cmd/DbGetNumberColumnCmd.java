@@ -1,7 +1,7 @@
 package vn.vnpt.cms.api.cmd;
 
 import vn.vnpt.cms.api.kernel.db.cmd.DbCallableCmd;
-import vn.vnpt.cms.api.listener.entities.CategoryFieldInfo;
+import vn.vnpt.cms.api.listener.entities.CatalogFieldInfo;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DbGetNumberColumnCmd extends DbCallableCmd {
     private final long categoryId;
-    private List<CategoryFieldInfo> categoryFieldInfos;
+    private List<CatalogFieldInfo> categoryFieldInfos;
     private String tblName;
     private int createdHierarchy;
 
@@ -42,7 +42,7 @@ public class DbGetNumberColumnCmd extends DbCallableCmd {
 
                 try {
                     while (rs.next()) {
-                        CategoryFieldInfo categoryFieldInfo = new CategoryFieldInfo();
+                        CatalogFieldInfo categoryFieldInfo = new CatalogFieldInfo();
                         categoryFieldInfo.setEntryId(rs.getLong("entryId"));
                         categoryFieldInfo.setCode(rs.getString("code_"));
                         categoryFieldInfo.setName(rs.getString("name"));
@@ -60,7 +60,7 @@ public class DbGetNumberColumnCmd extends DbCallableCmd {
         }
     }
 
-    public List<CategoryFieldInfo> getCategoryFieldInfoList() {
+    public List<CatalogFieldInfo> getCategoryFieldInfoList() {
         return this.categoryFieldInfos;
     }
 

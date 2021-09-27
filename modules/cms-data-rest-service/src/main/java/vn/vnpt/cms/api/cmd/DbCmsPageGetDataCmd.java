@@ -13,20 +13,20 @@ import java.util.List;
 public class DbCmsPageGetDataCmd extends DbPagingCmd {
     private final long catalogId;
     private final String name;
-    private final int page_idx;
-    private final int page_size;
-    private final String order_by;
+    private final int pageIndex;
+    private final int pageSize;
+    private final String orderBy;
     private final int status;
     private GetDataFromTable resp;
     private final List<Column> lsColumn = new ArrayList<>();
     private String xxx;
 
-    public DbCmsPageGetDataCmd(String transId, String channel, long catalogId, String name, int page_idx, int page_size, String order_by, int status) {
+    public DbCmsPageGetDataCmd(String transId, String channel, long catalogId, String name, int pageIndex, int pageSize, String orderBy, int status) {
         super(transId, channel);
         this.catalogId = catalogId;
-        this.page_idx = page_idx;
-        this.page_size = page_size;
-        this.order_by = order_by;
+        this.pageIndex = pageIndex;
+        this.pageSize = pageSize;
+        this.orderBy = orderBy;
         this.name = name;
         this.status = status;
     }
@@ -38,7 +38,7 @@ public class DbCmsPageGetDataCmd extends DbPagingCmd {
         this.totalPage = this.cst.getInt(10);
         this.beginIdx = this.cst.getInt(11);
         this.endIdx = this.cst.getInt(12);
-        this.pageInfo = new PagingEntity(this.page_idx, this.page_size, this.totalRecord, this.totalPage, this.beginIdx, this.endIdx);
+        this.pageInfo = new PagingEntity(this.pageIndex, this.pageSize, this.totalRecord, this.totalPage, this.beginIdx, this.endIdx);
 
         try (ResultSet rsColumn = this.cst.getResultSet()) {
             if (rsColumn != null) {
@@ -123,9 +123,9 @@ public class DbCmsPageGetDataCmd extends DbPagingCmd {
         this.cst.registerOutParameter(this.idx++, 12);
         this.cst.setLong(this.idx++, this.catalogId);
         this.setString(this.name);
-        this.cst.setInt(this.idx++, this.page_size);
-        this.cst.setInt(this.idx++, this.page_idx);
-        this.setString(this.order_by);
+        this.cst.setInt(this.idx++, this.pageSize);
+        this.cst.setInt(this.idx++, this.pageIndex);
+        this.setString(this.orderBy);
         this.cst.setInt(this.idx++, this.status);
         this.cst.registerOutParameter(this.idx++, 4);
         this.cst.registerOutParameter(this.idx++, 4);

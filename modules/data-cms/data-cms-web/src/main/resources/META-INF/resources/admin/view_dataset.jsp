@@ -32,7 +32,7 @@
     </div>
 </clay:container-fluid>
 <script>
-    dataSet.renderDataSetDataTable('<%=catalog.getCatalogId()%>');
+    dataSet.renderDataSetDataTable('<%=catalog.getCatalogId()%>', []);
 </script>
 <script id="catalogSearchForm" type="text/x-jQuery-tmpl">
     <div class="row mb-2">

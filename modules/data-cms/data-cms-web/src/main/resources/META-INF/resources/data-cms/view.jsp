@@ -39,17 +39,29 @@
             <div class="management-bar-light mb-2" id="catalogSearch">
             </div>
             <div id="catalogDataTable" class="mb-2"></div>
+            <div id="pagination" class="mb-2">
+                <ul class="pagination pagination-content">
+                    <li><a href="#">Prev</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">Next</a></li>
+                </ul>
+            </div>
             <div class="download-resource">
-                <a href='/o/source_data/export?type=1&catalogId=<%=catalog.getCatalogId()%>' download>
-                    <%=catalog.getTitle()%>
-                </a>
+                <button class="btn btn-primary download-data" onclick="catalog.downloadFile(1,<%=catalogId%>)">
+                    PDF
+                </button>
+                <button class="btn btn-primary download-data" onclick="catalog.downloadFile(2,<%=catalogId%>)">
+                    CSV
+                </button>
             </div>
         </aui:fieldset>
     </c:if>
 </div>
 <script>
     if ('<%=catalog != null%>') {
-        dataSet.renderDataSetDataTable('<%=catalogId%>');
+        dataSet.renderDataSetDataTable('<%=catalogId%>', []);
     }
 </script>
 <script id="catalogSearchForm" type="text/x-jQuery-tmpl">
@@ -77,4 +89,5 @@
             </button>
         </div>
     </div>
+
 </script>

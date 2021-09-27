@@ -2,31 +2,63 @@ package vn.vnpt.cms.api.controller.channels;
 
 import vn.vnpt.cms.api.cmd.DbCmsPageGetDataCmd;
 import vn.vnpt.cms.api.config.CoreConfig;
-import vn.vnpt.cms.api.controller.base.AbsApiBaseParamReqTypeCmd;
+import vn.vnpt.cms.api.controller.base.AbsApiBaseBodyReqTypeCmd;
+import vn.vnpt.cms.api.listener.entities.CmsCatalogSearch;
+import vn.vnpt.cms.api.listener.request.CmsCatalogGetDataReq;
 import vn.vnpt.cms.api.listener.response.BaseResp;
 import vn.vnpt.cms.api.listener.response.BasicPagingData;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
-public class CmsCatalogGetDataCmd extends AbsApiBaseParamReqTypeCmd {
-    private final long catalogId;
-    private final String name;
-    private final int page_idx;
-    private final String order_by;
-    private final int status;
+public class CmsCatalogGetDataCmd extends AbsApiBaseBodyReqTypeCmd {
+    private long catalogId;
+    private int pageIndex;
+    private String orderBy;
+    private List<CmsCatalogSearch> searchColumns;
+    private int status;
 
-    public CmsCatalogGetDataCmd(HttpServletRequest httpServletRequest, String channel, String transId, long catalogId, String name, int page_idx, String order_by, int status) {
-        super(httpServletRequest, channel, transId);
-        this.catalogId = catalogId;
-        this.page_idx = page_idx;
-        this.order_by = order_by;
-        this.name = name;
-        this.status = status;
+    public CmsCatalogGetDataCmd() {
+        super();
+    }
+
+    public CmsCatalogGetDataCmd(HttpServletRequest httpServletRequest, String jsonRequest, Class<?> classRequest) {
+        super(httpServletRequest, jsonRequest, classRequest);
     }
 
     protected void executeCmd() throws Exception {
-        DbCmsPageGetDataCmd dbCmd = new DbCmsPageGetDataCmd(this.transId, this.channel, this.catalogId,
-                this.name, this.page_idx, CoreConfig.PAGE_SIZE, this.order_by, this.status);
+        String textSearch = "";
+        if (searchColumns.size() > 0) {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < searchColumns.size(); ++i) {
+                CmsCatalogSearch search = searchColumns.get(i);
+                String name = search.getName();
+                String value = search.getValue();
+                String dataType = search.getDataType();
+                if (dataType.equals("VARCHAR")) {
+                    builder.append(name);
+                    builder.append(" LIKE '%");
+                    builder.append(value);
+                    builder.append("%' ");
+                } else if (dataType.equals("BIGINT")) {
+                    builder.append(name);
+                    builder.append("=");
+                    builder.append(value);
+                    builder.append(" ");
+                } else {
+                    builder.append(name);
+                    builder.append("=");
+                    builder.append(value);
+                    builder.append(" ");
+                }
+                if (i != (searchColumns.size() -1)) {
+                    builder.append("AND ");
+                }
+            }
+            textSearch = builder.toString();
+        }
+        DbCmsPageGetDataCmd dbCmd = new DbCmsPageGetDataCmd(this.transId, this.channel, this.catalogId, textSearch
+                , this.pageIndex, CoreConfig.PAGE_SIZE, this.orderBy, this.status);
         this.executeDbCmd(dbCmd);
         if (dbCmd.getCode() == 0) {
             this.objResponse = new BaseResp(dbCmd.getCode(), dbCmd.getMessage(), new BasicPagingData(dbCmd.getPageInfo(), dbCmd.getResp()));
@@ -42,6 +74,11 @@ public class CmsCatalogGetDataCmd extends AbsApiBaseParamReqTypeCmd {
     }
 
     protected boolean validateData() {
+        this.catalogId = ((CmsCatalogGetDataReq) this.objRequest).getCatalogId();
+        this.pageIndex = ((CmsCatalogGetDataReq) this.objRequest).getPageIndex();
+        this.status = ((CmsCatalogGetDataReq) this.objRequest).getStatus();
+        this.searchColumns = ((CmsCatalogGetDataReq) this.objRequest).getSearchColumns();
+        this.orderBy = ((CmsCatalogGetDataReq) this.objRequest).getOrderBy();
         return true;
     }
 

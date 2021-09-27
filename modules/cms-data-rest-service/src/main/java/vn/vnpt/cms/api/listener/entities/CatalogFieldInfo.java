@@ -1,6 +1,6 @@
 package vn.vnpt.cms.api.listener.entities;
 
-public class CategoryFieldInfo {
+public class CatalogFieldInfo {
     private long entryId;
     private String name;
     private String code;
@@ -9,7 +9,7 @@ public class CategoryFieldInfo {
     private String defaultValue;
     private boolean notNull;
 
-    public CategoryFieldInfo() {
+    public CatalogFieldInfo() {
     }
 
     public long getEntryId() {

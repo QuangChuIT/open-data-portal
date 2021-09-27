@@ -8,7 +8,7 @@ import vn.vnpt.cms.api.controller.base.AbsApiBaseParamReqTypeCmd;
 import vn.vnpt.cms.api.kernel.util.DateTimeUtil;
 import vn.vnpt.cms.api.kernel.util.DateUtils;
 import vn.vnpt.cms.api.kernel.util.StringUtils;
-import vn.vnpt.cms.api.listener.entities.CategoryFieldInfo;
+import vn.vnpt.cms.api.listener.entities.CatalogFieldInfo;
 import vn.vnpt.cms.api.listener.response.BaseResp;
 import vn.vnpt.cms.api.listener.response.ResultCode;
 
@@ -39,10 +39,10 @@ public class SourceDataImportCmd extends AbsApiBaseParamReqTypeCmd {
             this.objResponse = new BaseResp(dbCmd.getCode(), dbCmd.getMessage());
         } else {
             String tblName = dbCmd.getTblName();
-            List<CategoryFieldInfo> categoryFieldInfoList = dbCmd.getCategoryFieldInfoList();
+            List<CatalogFieldInfo> categoryFieldInfoList = dbCmd.getCategoryFieldInfoList();
             List<String> columns = new ArrayList<>();
             Map<String, String> mapColumnName = new HashMap<>();
-            for (CategoryFieldInfo categoryFieldInfo : categoryFieldInfoList) {
+            for (CatalogFieldInfo categoryFieldInfo : categoryFieldInfoList) {
                 String fileName = categoryFieldInfo.getName().trim().toLowerCase();
                 columns.add(fileName);
                 mapColumnName.put(categoryFieldInfo.getName(), categoryFieldInfo.getCode());

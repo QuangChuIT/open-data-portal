@@ -8,11 +8,13 @@ var dataSet = {
     },
     _renderDataTable(columns, datas) {
         console.log("Start rendering datatable with columns size: " + columns.length + " and data length: " + datas.length);
+        $("#catalogDataTable").empty();
         // build datatable
         YUI().use(
             'aui-datatable',
             'aui-datatype',
             'datatable-sort',
+            'datatable-paginator',
             function (Y) {
                 const dataTable = new Y.DataTable(
                     {
@@ -26,8 +28,8 @@ var dataSet = {
                                 fn: Y.Plugin.DataTableHighlight
                             }
                         ],
-                        rowsPerPage: 10,
-                        pageSizes: [2, 'Show All']
+                        pageSizes: [ 4, 'Show All' ],
+                        rowsPerPage: 4
                     }
                 ).render('#catalogDataTable');
 
@@ -35,12 +37,23 @@ var dataSet = {
             }
         );
     },
-    renderDataSetDataTable: function (catalogId) {
+    renderDataSetDataTable: function (catalogId, columnSearch) {
         let instance = this;
-        const catalogGetDataUrl = config.host + "/o/catalog/get_data?catalogId=" + catalogId + '&channel=CMS&transId=ktgb8x1l';
+        const catalogGetDataUrl = config.host + "/o/catalog/get_data";
+        const request = {};
+        request.catalogId = catalogId;
+        request.pageIndex = 1;
+        request.status = 1;
+        request.searchColumns = columnSearch;
+        request.orderBy = "";
+        request.transId = "abcxyz";
+        request.channel = "cms";
+
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: catalogGetDataUrl,
+            contentType: "application/json",
+            data: JSON.stringify(request),
             dataType: "json",   //expect html to be returned
             success: function (response) {
                 // build search form
@@ -82,6 +95,7 @@ var dataSet = {
             column.values = [];
         }
         dataCfg.columns = columnSearch;
+        $("#catalogSearch").empty();
         $("#catalogSearchForm").tmpl(dataCfg).appendTo("#catalogSearch");
     },
     searchData: function () {
@@ -90,34 +104,25 @@ var dataSet = {
         let columns = JSON.parse(localStorage.getItem("columnSearch"));
         columns.forEach(function (e) {
             const columnSearch = {};
-            columnSearch.key = e.code;
-            columnSearch.value = $("#" + e.code).val("");
-            searchRequest.push(columnSearch);
-        });
-        const catalogId = localStorage.getItem("catalogId");
-        const catalogSearchDataUrl = config.host + "/o/catalog/search?catalogId=" + catalogId + '&channel=CMS&transId=ktgb8x1l';
-        $.ajax({
-            type: "POST",
-            url: catalogSearchDataUrl,
-            data: JSON.stringify(searchRequest),
-            dataType: "json",   //expect html to be returned
-            success: function (response) {
-                // build search form
-                const key = catalogId + "_columns";
-                const nestedCols = JSON.parse(localStorage.getItem(key));
-                instance._renderDataTable(nestedCols, response.data.items.data);
-            },
-            error: function () {
-
+            columnSearch.name = e.code;
+            columnSearch.value = $("#" + e.code).val();
+            columnSearch.dataType = e.dataType;
+            columnSearch.catalogId = e.catalogId;
+            if(columnSearch.value !== ""){
+                searchRequest.push(columnSearch);
             }
         });
-
+        let catalogId = localStorage.getItem("catalogId");
+        instance.renderDataSetDataTable(catalogId, searchRequest);
     },
     clearSearch: function () {
+        let instance = this;
+        console.log("Clear search now");
         let columns = JSON.parse(localStorage.getItem("columnSearch"));
+        let catalogId = localStorage.getItem("catalogId");
         columns.forEach(function (e) {
             $("#" + e.code).val("");
         });
-        console.log("Clear search now");
+        instance.renderDataSetDataTable(catalogId, []);
     }
 }

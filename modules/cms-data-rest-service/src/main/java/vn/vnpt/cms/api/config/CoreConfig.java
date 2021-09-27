@@ -18,7 +18,7 @@ public class CoreConfig {
     public static String BASE_FONTS_FOLDER = "/opt/bkav/bin/cms_api/resource/fonts/arial.ttf";
     public static float STT_LENGTH = 50.0F;
     public static float COLUMN_LENGTH = 150.0F;
-    public static int PAGE_SIZE = 30;
+    public static int PAGE_SIZE = 20;
     public static String DEFAULT_PASS_WORD = "bkav123!@";
     public static int TOKEN_LOG_MAX_LENGTH = 50;
     public static int RESPONSE_LOG_MAX_LENGTH = 500;

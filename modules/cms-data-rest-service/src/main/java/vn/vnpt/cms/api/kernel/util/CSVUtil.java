@@ -1,41 +1,37 @@
 package vn.vnpt.cms.api.kernel.util;
 
-import vn.vnpt.cms.api.listener.entities.Column;
-
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class CSVUtil {
-    private BufferedWriter fileWriter;
 
-    public void export(String[] headers, String[][] body, String filePath) {
-        
+    public static void export(String[] headers, List<List<String>> dataExport, String filePath) {
+        Path path = Paths.get(filePath);
+        try (BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8)) {
 
-    }
-    private String getFileName(String baseName) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-        String dateTimeInfo = dateFormat.format(new Date());
-        return baseName.concat(String.format("_%s.csv", dateTimeInfo));
-    }
+            StringBuilder headerBuilder = new StringBuilder();
+            for (String header : headers) {
+                headerBuilder.append(header).append(",");
+            }
+            String headerLine = headerBuilder.toString();
+            writer.write(headerLine.substring(0, headerLine.length() - 1));
 
-    private int writeHeaderLine(List<Column> columns) throws IOException {
-
-        int numberOfColumns = columns.size();
-        String headerLine = "";
-
-        // exclude the first column which is the ID field
-        for (int i = 2; i <= numberOfColumns; i++) {
-            String columnName = "";
-            headerLine = headerLine.concat(columnName).concat(",");
+            for (List<String> data : dataExport) {
+                writer.newLine();
+                String collect = String.join(",", data);
+                writer.write(collect);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        fileWriter.write(headerLine.substring(0, headerLine.length() - 1));
-
-        return numberOfColumns;
     }
 
 }
