@@ -44,7 +44,7 @@
         <aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="assets-resources">
             <div class="management-bar-light mb-2" id="catalogSearch">
             </div>
-            <div id="catalogDataTable" class="mb-2"></div
+            <div id="catalogDataTable" class="mb-2"></div>
             <table id="datasetTable" class="table table-striped table-bordered" style="width:100%">
             </table>
             <div class="download-resource">
@@ -59,9 +59,6 @@
     </c:if>
 </div>
 <script>
-    $(document).ready(function() {
-        $('#example').DataTable();
-    } );
     if ('<%=catalog != null%>') {
         dataSet.renderDataSetDataTable('<%=catalogId%>', []);
     }

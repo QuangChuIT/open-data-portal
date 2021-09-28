@@ -1,12 +1,36 @@
 var dataSet = {
-    setting: {
-        host: "/dataset",
-        mod: "release"
+    appSetting: {
+        host: "/o/catalog",
+        mod: "release",
+        debugAgent: "web",
+        root: $("#main-content"),
+        cookie: 1,
+        pathPlugin: "/asset",
+        requestTimeout: 5000, // Timeout request for ajax,
+        dataTable: null,
+        mode: "inbox"
     },
     init: function () {
         console.log("data set init");
     },
-    _renderDataTable(columns, datas) {
+    _renderDataTable: function (columns, datas){
+        let instance = this;
+        $("#datasetTable").DataTable({
+            serverSide: false,
+            process: false,
+            data: datas,
+            responsive: true,
+            pageLength: 24,
+            autoWidth: false,
+            ordering: true,
+            bDestroy: true,
+            lengthChange: true,
+            paging: true,
+            info: false,
+            columns: columns
+        });
+    },
+    _renderDataTable_YUI(columns, datas) {
         console.log("Start rendering datatable with columns size: " + columns.length + " and data length: " + datas.length);
         $("#catalogDataTable").empty();
         // build datatable
@@ -54,16 +78,24 @@ var dataSet = {
             data: JSON.stringify(request),
             dataType: "json",   //expect html to be returned
             success: function (response) {
+                console.log("aaaaa");
                 // build search form
                 instance.createFormSearch(response.data.items.headers);
                 const headers = response.data.items.headers;
                 const nestedCols = [];
+                const first = {};
+                first.name = "id";
+                first.title = "Id";
+                nestedCols.push(first);
                 headers.forEach(function (item) {
                     const column = {};
-                    column.sortable = true;
-                    column.key = item.code;
-                    column.label = item.name;
+                    column.name = item.code;
+                    column.title = item.name;
                     nestedCols.push(column);
+                    column.data = null;
+                    column.render = function (data){
+                        return data[item.code];
+                    }
                 });
                 const key = catalogId + "_columns";
                 localStorage.setItem(key, JSON.stringify(nestedCols));

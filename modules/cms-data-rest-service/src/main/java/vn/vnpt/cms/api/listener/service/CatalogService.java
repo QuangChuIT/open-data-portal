@@ -54,7 +54,6 @@ public class CatalogService extends BaseService {
         return cmd.getResponse();
     }
 
-
     @POST
     @Path("/get_data")
     @Produces(ContentTypes.APPLICATION_JSON)
@@ -63,7 +62,6 @@ public class CatalogService extends BaseService {
         cmd.execute();
         return cmd.getResponse();
     }
-
 
     @Reference
     private ServiceContextContentProvider _serviceContextContentProvider;
