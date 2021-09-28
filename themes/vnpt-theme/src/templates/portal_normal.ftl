@@ -10,7 +10,8 @@
     <meta content="initial-scale=1.0, width=device-width" name="viewport"/>
 
     <@liferay_util["include"] page=top_head_include />
-
+    <link rel="stylesheet" href="${css_folder}/datatable/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="${css_folder}/datatable/responsive.bootstrap4.min.css">
     <script type="text/javascript" src="${javascript_folder}/jquery.tmpl.js"></script>
 </head>
 
@@ -128,7 +129,10 @@
 <@liferay_util["include"] page=body_bottom_include />
 
 <@liferay_util["include"] page=bottom_include />
-
+<script src="${javascript_folder}/datatable/jquery.dataTables.min.js"></script>
+<script src="${javascript_folder}/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="${javascript_folder}/datatable/dataTables.responsive.min.js"></script>
+<script src="${javascript_folder}/datatable/responsive.bootstrap4.min.js"></script>
 </body>
 
 </html>

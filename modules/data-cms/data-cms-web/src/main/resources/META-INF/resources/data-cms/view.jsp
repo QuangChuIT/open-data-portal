@@ -2,14 +2,20 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="vn.vnpt.data.cms.model.Catalog" %>
 <%@ page import="vn.vnpt.data.cms.service.CatalogLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.kernel.exception.PortalException" %>
 <%@ include file="/init.jsp" %>
 <%
     long catalogId = ParamUtil.getLong(request, "catalogId", 0L);
     Catalog catalog = null;
     if (catalogId != 0L) {
-        catalog = CatalogLocalServiceUtil.getCatalog(catalogId);
+        try {
+            catalog = CatalogLocalServiceUtil.getCatalog(catalogId);
+        } catch (PortalException e) {
+            e.printStackTrace();
+        }
     }
 %>
+
 <div class="catalog-wrapper">
     <c:if test="<%=catalog != null%>">
         <div class="panel-title mb-2">
@@ -38,16 +44,9 @@
         <aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="assets-resources">
             <div class="management-bar-light mb-2" id="catalogSearch">
             </div>
-            <div id="catalogDataTable" class="mb-2"></div>
-            <div id="pagination" class="mb-2">
-                <ul class="pagination pagination-content">
-                    <li><a href="#">Prev</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">Next</a></li>
-                </ul>
-            </div>
+            <div id="catalogDataTable" class="mb-2"></div
+            <table id="datasetTable" class="table table-striped table-bordered" style="width:100%">
+            </table>
             <div class="download-resource">
                 <button class="btn btn-primary download-data" onclick="catalog.downloadFile(1,<%=catalogId%>)">
                     PDF
@@ -60,6 +59,9 @@
     </c:if>
 </div>
 <script>
+    $(document).ready(function() {
+        $('#example').DataTable();
+    } );
     if ('<%=catalog != null%>') {
         dataSet.renderDataSetDataTable('<%=catalogId%>', []);
     }

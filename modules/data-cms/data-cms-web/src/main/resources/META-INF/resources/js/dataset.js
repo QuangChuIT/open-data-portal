@@ -14,7 +14,7 @@ var dataSet = {
             'aui-datatable',
             'aui-datatype',
             'datatable-sort',
-            'datatable-paginator',
+            'aui-pagination',
             function (Y) {
                 const dataTable = new Y.DataTable(
                     {
@@ -27,9 +27,7 @@ var dataSet = {
                                 },
                                 fn: Y.Plugin.DataTableHighlight
                             }
-                        ],
-                        pageSizes: [ 4, 'Show All' ],
-                        rowsPerPage: 4
+                        ]
                     }
                 ).render('#catalogDataTable');
 
