@@ -8,12 +8,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbCmsCategoryGetDetailColumnCmd extends DbCallableCmd {
+public class DbCmsCatalogGetDetailColumnCmd extends DbCallableCmd {
     private final long catalogId;
     private final CmsCatalogInfo cateInfo = new CmsCatalogInfo();
     private final List<Column> lsColumn = new ArrayList<>();
 
-    public DbCmsCategoryGetDetailColumnCmd(String transId, String channel, long catalogId) {
+    public DbCmsCatalogGetDetailColumnCmd(String transId, String channel, long catalogId) {
         super(transId, channel);
         this.catalogId = catalogId;
     }
@@ -29,6 +29,8 @@ public class DbCmsCategoryGetDetailColumnCmd extends DbCallableCmd {
                 this.cateInfo.setTableName(rsCate.getString("tableName"));
                 this.cateInfo.setCatType(rsCate.getInt("catType"));
                 this.cateInfo.setStatus(rsCate.getInt("status"));
+                this.cateInfo.setDescription(rsCate.getString("description"));
+                this.cateInfo.setVisibility(rsCate.getBoolean("visibility"));
             }
         }
 
@@ -44,7 +46,7 @@ public class DbCmsCategoryGetDetailColumnCmd extends DbCallableCmd {
                         String format = rsColumnInfos.getString("format");
                         String defaultValue = rsColumnInfos.getString("defaultValue");
                         boolean notNull = rsColumnInfos.getBoolean("notNull");
-                        boolean hiddenStatus = rsColumnInfos.getBoolean("hidden_status");
+                        boolean hiddenStatus = rsColumnInfos.getBoolean("hiddenStatus");
                         boolean isSearch = rsColumnInfos.getBoolean("isSearch");
                         Column obj = new Column();
                         obj.setEntryId(entryId);

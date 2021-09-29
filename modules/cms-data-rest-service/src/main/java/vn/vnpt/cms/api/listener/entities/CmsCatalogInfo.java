@@ -1,13 +1,15 @@
 package vn.vnpt.cms.api.listener.entities;
 
-public class CmsCategoryInfo {
+public class CmsCatalogInfo {
     private long catalogId;
     private String tableName;
     private String title;
     private int catType;
+    private String description;
+    private boolean visibility;
     private int status;
 
-    public CmsCategoryInfo() {
+    public CmsCatalogInfo() {
     }
 
     public long getCatalogId() {
@@ -48,5 +50,21 @@ public class CmsCategoryInfo {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public boolean isVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(boolean visibility) {
+        this.visibility = visibility;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

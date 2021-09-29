@@ -2,23 +2,23 @@ package vn.vnpt.cms.api.listener.entities;
 
 import java.util.List;
 
-public class CategoryGetDetailColumn {
-    private CmsCategoryInfo cateInfo;
+public class CatalogGetDetailColumn {
+    private CmsCatalogInfo cateInfo;
     private List<Column> lsColumn;
 
-    public CategoryGetDetailColumn(CmsCategoryInfo cateInfo, List<Column> lsColumn) {
+    public CatalogGetDetailColumn(CmsCatalogInfo cateInfo, List<Column> lsColumn) {
         this.cateInfo = cateInfo;
         this.lsColumn = lsColumn;
     }
 
-    public CategoryGetDetailColumn() {
+    public CatalogGetDetailColumn() {
     }
 
-    public CmsCategoryInfo getCateInfo() {
+    public CmsCatalogInfo getCateInfo() {
         return this.cateInfo;
     }
 
-    public void setCateInfo(CmsCategoryInfo cateInfo) {
+    public void setCateInfo(CmsCatalogInfo cateInfo) {
         this.cateInfo = cateInfo;
     }
 

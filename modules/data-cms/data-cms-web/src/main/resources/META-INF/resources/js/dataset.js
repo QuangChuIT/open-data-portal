@@ -13,22 +13,49 @@ var dataSet = {
     init: function () {
         console.log("data set init");
     },
-    _renderDataTable: function (columns, datas){
+    _renderDataTable: function (catalogId, columns){
         let instance = this;
-        $("#datasetTable").DataTable({
-            serverSide: false,
-            process: false,
-            data: datas,
+        const url = config.host + "/o/catalog/get_data_detail?channel=cms&transId=123&catalogId=" + catalogId;
+        instance.appSetting.dataTable = $("#datasetTable").DataTable({
+            serverSide: true,
+            process: true,
+            ajax: {
+                url: url,
+                type: "GET"
+            },
             responsive: true,
-            pageLength: 24,
+            pageLength: 15,
             autoWidth: false,
-            ordering: true,
+            ordering: false,
+            lengthChange: false,
+            searching: true,
             bDestroy: true,
-            lengthChange: true,
+            language: app_message.language,
             paging: true,
             info: false,
-            columns: columns
+            dom: "lrtip",
+            columns: columns,
+            "columnDefs": [
+                {
+                    "searchable": false,
+                    "orderable": false,
+                    "targets": 0
+                }
+            ],
+            "order": [
+                [1, 'asc']
+            ],
         });
+
+        /*// Here we create the index column in jquery datatable
+        instance.appSetting.dataTable.on('order.dt search.dt', function() {
+            instance.appSetting.dataTable.column(0, {
+                search: 'applied',
+                order: 'applied'
+            }).nodes().each(function(cell, i) {
+                cell.innerHTML = i + 1;
+            });
+        }).draw();*/
     },
     _renderDataTable_YUI(columns, datas) {
         console.log("Start rendering datatable with columns size: " + columns.length + " and data length: " + datas.length);
@@ -61,45 +88,29 @@ var dataSet = {
     },
     renderDataSetDataTable: function (catalogId, columnSearch) {
         let instance = this;
-        const catalogGetDataUrl = config.host + "/o/catalog/get_data";
-        const request = {};
-        request.catalogId = catalogId;
-        request.pageIndex = 1;
-        request.status = 1;
-        request.searchColumns = columnSearch;
-        request.orderBy = "";
-        request.transId = "abcxyz";
-        request.channel = "cms";
+        const catalogGetColumnUrl = config.host + "/o/catalog/get_detail_column?transId=kyzica&channel=cms&catalogId=" + catalogId;
 
         $.ajax({
-            type: "POST",
-            url: catalogGetDataUrl,
+            type: "GET",
+            url: catalogGetColumnUrl,
             contentType: "application/json",
-            data: JSON.stringify(request),
-            dataType: "json",   //expect html to be returned
+            dataType: "json",
             success: function (response) {
-                console.log("aaaaa");
                 // build search form
-                instance.createFormSearch(response.data.items.headers);
-                const headers = response.data.items.headers;
+                instance.createFormSearch(response.data.lsColumn);
+                const headers = response.data.lsColumn;
                 const nestedCols = [];
-                const first = {};
-                first.name = "id";
-                first.title = "Id";
-                nestedCols.push(first);
                 headers.forEach(function (item) {
                     const column = {};
                     column.name = item.code;
                     column.title = item.name;
+                    column.data = item.code;
+                    column.searchable = item.isSearch;
                     nestedCols.push(column);
-                    column.data = null;
-                    column.render = function (data){
-                        return data[item.code];
-                    }
                 });
                 const key = catalogId + "_columns";
                 localStorage.setItem(key, JSON.stringify(nestedCols));
-                instance._renderDataTable(nestedCols, response.data.items.data);
+                instance._renderDataTable(catalogId,nestedCols);
             }
         });
         localStorage.removeItem("catalogId");

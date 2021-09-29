@@ -26,6 +26,11 @@ $navigation-bar-light: (
 $portlet-decorate-bg: #fff;
 $portlet-decorate-border: 1px solid $light-color;
 
+// custom clay table
+$table-cell-padding : 0.5rem;
+$table-head-height: auto;
+$table-head-bg : rgba(175,212,251,.25);
+$table-border-width : 1px;
 // Compat
 
 $compat-alerts: false;

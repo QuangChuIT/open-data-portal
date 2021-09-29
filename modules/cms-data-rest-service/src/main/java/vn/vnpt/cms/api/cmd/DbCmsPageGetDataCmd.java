@@ -16,6 +16,7 @@ public class DbCmsPageGetDataCmd extends DbPagingCmd {
     private final int pageIndex;
     private final int pageSize;
     private final String orderBy;
+    private int totalRecordFilters;
     private final int status;
     private GetDataFromTable resp;
     private final List<Column> lsColumn = new ArrayList<>();
@@ -28,6 +29,7 @@ public class DbCmsPageGetDataCmd extends DbPagingCmd {
         this.pageSize = pageSize;
         this.orderBy = orderBy;
         this.name = name;
+        this.totalRecordFilters = 0;
         this.status = status;
     }
 
@@ -82,7 +84,7 @@ public class DbCmsPageGetDataCmd extends DbPagingCmd {
                     for (i = 1; i < columnCount + 1; ++i) {
                         columnList.add(meta.getColumnName(i));
                     }
-
+                    int count = 0;
                     while (rsData.next()) {
                         builderData.append("{");
 
@@ -99,11 +101,12 @@ public class DbCmsPageGetDataCmd extends DbPagingCmd {
                                         getString(columnList.get(columnList.size() - 1)).trim())
                                 .append("\"");
                         builderData.append("},");
+                        count++;
                     }
+                    this.totalRecordFilters = count;
                 }
             }
         }
-
         String strData = builderData.toString();
         if (!strData.isEmpty()) {
             strData = strData.substring(0, strData.length() - 1);
@@ -139,5 +142,9 @@ public class DbCmsPageGetDataCmd extends DbPagingCmd {
 
     public String getXxx() {
         return this.xxx;
+    }
+
+    public int getTotalRecordFilters() {
+        return totalRecordFilters;
     }
 }

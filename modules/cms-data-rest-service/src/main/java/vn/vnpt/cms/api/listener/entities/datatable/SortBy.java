@@ -1,4 +1,4 @@
-package com.bkav.edoc.service.database.entity.pagination;
+package vn.vnpt.cms.api.listener.entities.datatable;
 
 import java.util.HashMap;
 import java.util.Map;

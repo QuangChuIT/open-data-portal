@@ -8,14 +8,14 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
 import vn.vnpt.cms.api.controller.channels.CmsCatalogGetDataCmd;
+import vn.vnpt.cms.api.controller.channels.CmsCatalogGetDataDetailCmd;
+import vn.vnpt.cms.api.controller.channels.CmsCatalogGetDetailColumnCmd;
 import vn.vnpt.cms.api.controller.channels.CmsCatalogInsertCmd;
 import vn.vnpt.cms.api.internal.context.ServiceContextContentProvider;
 import vn.vnpt.cms.api.listener.request.CmsCatalogGetDataReq;
 import vn.vnpt.cms.api.listener.request.CmsCategoryCreateReq;
 
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
@@ -59,6 +59,25 @@ public class CatalogService extends BaseService {
     @Produces(ContentTypes.APPLICATION_JSON)
     public Response getData(String jsonRequest) {
         CmsCatalogGetDataCmd cmd = new CmsCatalogGetDataCmd(this.httpServletRequest, jsonRequest, CmsCatalogGetDataReq.class);
+        cmd.execute();
+        return cmd.getResponse();
+    }
+
+    @GET
+    @Path("/get_data_detail")
+    @Produces(ContentTypes.APPLICATION_JSON)
+    public Response getCatalogData(@QueryParam("channel") String channel, @QueryParam("transId") String transId,
+                                   @QueryParam("catalogId") Integer catalogId) {
+        CmsCatalogGetDataDetailCmd cmd = new CmsCatalogGetDataDetailCmd(this.httpServletRequest, channel, transId, catalogId, 1);
+        cmd.execute();
+        return cmd.getResponse();
+    }
+
+    @GET
+    @Path("get_detail_column")
+    public Response getDetailColumn(@QueryParam("channel") String channel,
+                                    @QueryParam("transId") String transId, @QueryParam("catalogId") Integer catalogId) {
+        CmsCatalogGetDetailColumnCmd cmd = new CmsCatalogGetDetailColumnCmd(this.httpServletRequest, channel, transId, catalogId);
         cmd.execute();
         return cmd.getResponse();
     }
