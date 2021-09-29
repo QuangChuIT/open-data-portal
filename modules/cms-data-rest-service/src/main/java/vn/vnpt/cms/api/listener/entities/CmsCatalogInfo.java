@@ -1,13 +1,13 @@
 package vn.vnpt.cms.api.listener.entities;
 
-public class CmsCategoryInfo {
+public class CmsCatalogInfo {
     private long catalogId;
     private String tableName;
     private String title;
     private int catType;
     private int status;
 
-    public CmsCategoryInfo() {
+    public CmsCatalogInfo() {
     }
 
     public long getCatalogId() {

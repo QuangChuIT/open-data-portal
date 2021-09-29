@@ -1,4 +1,4 @@
-package com.bkav.edoc.service.database.entity.pagination;
+package vn.vnpt.cms.api.listener.entities.datatable;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;

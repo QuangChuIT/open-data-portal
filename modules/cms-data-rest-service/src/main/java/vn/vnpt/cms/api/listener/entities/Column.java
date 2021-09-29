@@ -2,7 +2,7 @@ package vn.vnpt.cms.api.listener.entities;
 
 public class Column {
     private long entryId;
-    private int catalogId;
+    private long catalogId;
     private String name;
     private String code;
     private String dataType;
@@ -20,11 +20,11 @@ public class Column {
         this.entryId = entryId;
     }
 
-    public int getCatalogId() {
+    public long getCatalogId() {
         return catalogId;
     }
 
-    public void setCatalogId(int catalogId) {
+    public void setCatalogId(long catalogId) {
         this.catalogId = catalogId;
     }
 
