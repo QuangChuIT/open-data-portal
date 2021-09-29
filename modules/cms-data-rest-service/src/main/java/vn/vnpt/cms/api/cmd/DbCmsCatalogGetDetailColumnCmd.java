@@ -29,6 +29,8 @@ public class DbCmsCatalogGetDetailColumnCmd extends DbCallableCmd {
                 this.cateInfo.setTableName(rsCate.getString("tableName"));
                 this.cateInfo.setCatType(rsCate.getInt("catType"));
                 this.cateInfo.setStatus(rsCate.getInt("status"));
+                this.cateInfo.setDescription(rsCate.getString("description"));
+                this.cateInfo.setVisibility(rsCate.getBoolean("visibility"));
             }
         }
 
@@ -44,7 +46,7 @@ public class DbCmsCatalogGetDetailColumnCmd extends DbCallableCmd {
                         String format = rsColumnInfos.getString("format");
                         String defaultValue = rsColumnInfos.getString("defaultValue");
                         boolean notNull = rsColumnInfos.getBoolean("notNull");
-                        boolean hiddenStatus = rsColumnInfos.getBoolean("hidden_status");
+                        boolean hiddenStatus = rsColumnInfos.getBoolean("hiddenStatus");
                         boolean isSearch = rsColumnInfos.getBoolean("isSearch");
                         Column obj = new Column();
                         obj.setEntryId(entryId);

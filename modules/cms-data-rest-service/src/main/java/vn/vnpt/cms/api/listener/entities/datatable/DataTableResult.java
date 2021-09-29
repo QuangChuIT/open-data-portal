@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class DataTableResult<T> {
+public class DataTableResult {
     /**
      * The draw.
      */
@@ -24,8 +24,7 @@ public class DataTableResult<T> {
      * The list of data objects.
      */
     @SerializedName("data")
-    List<T> listOfDataObjects;
-
+    List<Object> listOfDataObjects;
 
     public int getDraw() {
         return draw;
@@ -51,11 +50,11 @@ public class DataTableResult<T> {
         this.recordsTotal = recordsTotal;
     }
 
-    public List<T> getListOfDataObjects() {
+    public List<Object> getListOfDataObjects() {
         return listOfDataObjects;
     }
 
-    public void setListOfDataObjects(List<T> listOfDataObjects) {
+    public void setListOfDataObjects(List<Object> listOfDataObjects) {
         this.listOfDataObjects = listOfDataObjects;
     }
 }

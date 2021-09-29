@@ -45,7 +45,7 @@
             <div class="management-bar-light mb-2" id="catalogSearch">
             </div>
             <div id="catalogDataTable" class="mb-2"></div>
-            <table id="datasetTable" class="table table-striped table-bordered" style="width:100%">
+            <table id="datasetTable" class="table table-bordered table-hover" style="width:100%">
             </table>
             <div class="download-resource">
                 <button class="btn btn-primary download-data" onclick="catalog.downloadFile(1,<%=catalogId%>)">

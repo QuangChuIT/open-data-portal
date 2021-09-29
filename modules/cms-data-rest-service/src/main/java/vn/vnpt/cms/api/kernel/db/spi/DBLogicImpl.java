@@ -1,13 +1,10 @@
-// 
-// Decompiled by Procyon v0.5.36
-// 
-
 package vn.vnpt.cms.api.kernel.db.spi;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import vn.vnpt.cms.api.kernel.concurrent.DirectExecutorService;
+import vn.vnpt.cms.api.kernel.db.Connector;
 import vn.vnpt.cms.api.kernel.db.DBLogic;
 import vn.vnpt.cms.api.kernel.db.cmd.DBCommandBase;
 
@@ -18,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class DBLogicImpl implements DBLogic {
     private final Log logger;
     private final ExecutorService executor;
+    private Connector connector;
     private static DBLogicImpl INSTANCE;
 
     static public DBLogicImpl getInstance() throws Exception {
@@ -28,13 +26,12 @@ public class DBLogicImpl implements DBLogic {
     }
 
     @Override
-    public synchronized int init() {
-        this.logger.info("Start DBLogic");
-        return 0;
+    public synchronized void init() {
+        this.logger.info("Start DBLogic ...");
     }
 
     @Override
-    public synchronized int exit() {
+    public synchronized void exit() {
         if (this.executor != null) {
             this.executor.shutdown();
             try {
@@ -43,7 +40,6 @@ public class DBLogicImpl implements DBLogic {
                 logger.error(ex);
             }
         }
-        return 0;
     }
 
     @Override
@@ -53,9 +49,15 @@ public class DBLogicImpl implements DBLogic {
         return task;
     }
 
-    public DBLogicImpl() throws Exception {
+    public DBLogicImpl() {
         this.logger = LogFactoryUtil.getLog(DBLogicImpl.class);
         this.executor = new DirectExecutorService();
+    }
+
+    public DBLogicImpl(final ExecutorService executor, Connector connector) {
+        this.logger = LogFactoryUtil.getLog(DBLogicImpl.class);
+        this.connector = connector;
+        this.executor = executor;
     }
 
     private class DBJobTaskImp extends DBJobTask implements Runnable {

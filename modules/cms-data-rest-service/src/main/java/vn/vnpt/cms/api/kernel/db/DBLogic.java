@@ -8,9 +8,9 @@ import vn.vnpt.cms.api.kernel.db.cmd.DBCommandBase;
 import vn.vnpt.cms.api.kernel.db.spi.DBJobTask;
 
 public interface DBLogic {
-    int init();
+    void init();
 
-    int exit();
+    void exit();
 
     DBJobTask executeCommand(DBCommandBase dbCommandBase) throws Exception;
 }

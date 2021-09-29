@@ -94,10 +94,25 @@ body {
   }
 }
 
+// Table Bordered
+
+.table-bordered {
+  border: $table-border-width solid $table-border-color;
+
+  thead {
+    td,
+    th {
+      border-bottom-width: 0 !important;
+      border-top-width: 0 !important;
+    }
+  }
+}
+
 #footer {
   color: #fff;
   margin-top: 1rem;
   background-color: $complementary-color;
+
   > .container {
     padding-bottom: 3rem;
     padding-top: 3rem;

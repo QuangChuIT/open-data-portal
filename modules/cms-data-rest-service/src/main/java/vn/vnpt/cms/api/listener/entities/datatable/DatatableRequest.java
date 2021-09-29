@@ -1,8 +1,6 @@
 package vn.vnpt.cms.api.listener.entities.datatable;
 
-
 import vn.vnpt.cms.api.kernel.util.AppUtil;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -10,7 +8,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class DatatableRequest<T> {
+public class DatatableRequest {
     /**
      * The unique id.
      */
@@ -246,7 +244,7 @@ public class DatatableRequest<T> {
             this.setSearch(request.getParameter("search[value]"));
             this.setRegex(Boolean.parseBoolean(request.getParameter("search[regex]")));
 
-            int sortableCol = Integer.parseInt(request.getParameter("order[0][column]"));
+            //int sortableCol = Integer.parseInt(request.getParameter("order[0][column]"));
 
             List<DatatableColumnSpecs> columns = new ArrayList<>();
 
@@ -258,9 +256,9 @@ public class DatatableRequest<T> {
 
             for (int i = 0; i < maxParamsToCheck; i++) {
                 DatatableColumnSpecs colSpec = new DatatableColumnSpecs(request, i);
-                if (i == sortableCol) {
+                /*if (i == sortableCol) {
                     this.setOrder(colSpec);
-                }
+                }*/
                 columns.add(colSpec);
 
                 if (!AppUtil.isObjectEmpty(colSpec.getSearch())) {
