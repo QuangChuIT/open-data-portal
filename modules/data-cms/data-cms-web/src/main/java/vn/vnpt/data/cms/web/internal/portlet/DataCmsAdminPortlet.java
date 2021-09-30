@@ -21,6 +21,7 @@ import java.io.IOException;
                 "com.liferay.portlet.display-category=category.hidden",
                 "com.liferay.portlet.css-class-wrapper=data-cms-admin-portlet",
                 "com.liferay.portlet.header-portlet-css=/admin/css/main.css",
+                "com.liferay.portlet.header-portlet-javascript=/js/app-message.js",
                 "com.liferay.portlet.header-portlet-javascript=/admin/js/notify.min.js",
                 "com.liferay.portlet.header-portlet-javascript=/admin/js/upload-data.js",
                 "com.liferay.portlet.header-portlet-javascript=/js/dataset.js",

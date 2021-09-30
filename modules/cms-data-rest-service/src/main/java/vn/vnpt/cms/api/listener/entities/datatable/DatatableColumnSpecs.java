@@ -42,8 +42,6 @@ public class DatatableColumnSpecs {
      */
     private String sortDir;
 
-    private static List<String> columns;
-
     public DatatableColumnSpecs(HttpServletRequest request, int i) {
         this.setIndex(i);
         prepareColumnSpecs(request, i);
@@ -135,15 +133,5 @@ public class DatatableColumnSpecs {
         /*if (i == sortableCol) {
             this.setSortDir(sortDir);
         }*/
-    }
-
-    static {
-        columns = new ArrayList<>();
-        columns.add("ed.subject");
-        columns.add("ed.fromOrganDomain");
-        columns.add("ed.toOrganDomain");
-        columns.add("ed.docCode");
-        columns.add("ed.documentTypeName");
-        columns.add("ed.createDate");
     }
 }

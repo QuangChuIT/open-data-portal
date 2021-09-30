@@ -16,14 +16,13 @@ public class CmsCatalogGetDetailColumnCmd extends AbsApiBaseParamReqTypeCmd {
         this.catalogId = catalogId;
     }
 
-
     protected void executeCmd() throws Exception {
         DbCmsCatalogGetDetailColumnCmd dbCmd = new DbCmsCatalogGetDetailColumnCmd(this.transId, this.channel, this.catalogId);
         this.executeDbCmd(dbCmd);
         if (dbCmd.getCode() != ResultCode.SUCCESS.getCode()) {
             this.objResponse = new BaseResp(dbCmd.getCode(), dbCmd.getMessage());
+        } else {
+            this.objResponse = new BaseResp(dbCmd.getCode(), dbCmd.getMessage(), new CatalogGetDetailColumn(dbCmd.getCateInfo(), dbCmd.getLsColumn()));
         }
-
-        this.objResponse = new BaseResp(dbCmd.getCode(), dbCmd.getMessage(), new CatalogGetDetailColumn(dbCmd.getCateInfo(), dbCmd.getLsColumn()));
     }
 }

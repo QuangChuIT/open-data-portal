@@ -22,12 +22,28 @@
     <div class="management-bar-light mb-2" id="catalogSearch">
     </div>
     <div id="catalogDataTable" class="mb-2"></div>
-
-    <button id="showModal" class="btn btn-primary">Show Modal</button>
-
-    <div class="yui3-skin-sam">
-        <div id="modal">
-            <h1>hellow</h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Launch demo modal
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 </clay:container-fluid>
@@ -53,66 +69,4 @@
             </button>
         </div>
     </div>
-</script>
-<script>
-    YUI().use(
-        'aui-modal',
-        function(Y) {
-            var modal = new Y.Modal(
-                {
-                    bodyContent: 'How many pages do you want to print?',
-                    centered: true,
-                    destroyOnHide: false,
-                    headerContent: '<h3>Print</h3>',
-                    modal: true,
-                    render: '#modal',
-                    resizable: {
-                        handles: 'b, r'
-                    },
-                    toolbars: {
-                        body: [
-                            {
-                                icon: 'glyphicon glyphicon-file',
-                                label: 'Single Page'
-                            },
-                            {
-                                icon: 'glyphicon glyphicon-book',
-                                label: 'All Pages'
-                            }
-                        ]
-                    },
-                    visible: true,
-                    width: 450
-                }
-            ).render();
-
-            modal.addToolbar(
-                [
-                    {
-                        label: 'Cancel',
-                        on: {
-                            click: function() {
-                                modal.hide();
-                            }
-                        }
-                    },
-                    {
-                        label: 'Okay',
-                        on: {
-                            click: function() {
-                                alert('Just an example, there will be no printing here.');
-                            }
-                        }
-                    }
-                ]
-            );
-
-            Y.one('#showModal').on(
-                'click',
-                function() {
-                    modal.show();
-                }
-            );
-        }
-    );
 </script>

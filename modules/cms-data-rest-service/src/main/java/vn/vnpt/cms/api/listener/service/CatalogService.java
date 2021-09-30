@@ -67,8 +67,9 @@ public class CatalogService extends BaseService {
     @Path("/get_data_detail")
     @Produces(ContentTypes.APPLICATION_JSON)
     public Response getCatalogData(@QueryParam("channel") String channel, @QueryParam("transId") String transId,
-                                   @QueryParam("catalogId") Integer catalogId) {
-        CmsCatalogGetDataDetailCmd cmd = new CmsCatalogGetDataDetailCmd(this.httpServletRequest, channel, transId, catalogId, 1);
+                                   @QueryParam("catalogId") Integer catalogId,@QueryParam("searchAdv") String searchAdv) {
+        CmsCatalogGetDataDetailCmd cmd = new CmsCatalogGetDataDetailCmd(this.httpServletRequest, channel,
+                transId, catalogId, 1, searchAdv);
         cmd.execute();
         return cmd.getResponse();
     }

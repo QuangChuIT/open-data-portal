@@ -28,35 +28,6 @@ public class CmsCatalogGetDataCmd extends AbsApiBaseBodyReqTypeCmd {
 
     protected void executeCmd() throws Exception {
         String textSearch = "";
-        if (searchColumns.size() > 0) {
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < searchColumns.size(); ++i) {
-                CmsCatalogSearch search = searchColumns.get(i);
-                String name = search.getName();
-                String value = search.getValue();
-                String dataType = search.getDataType();
-                if (dataType.equals("VARCHAR")) {
-                    builder.append(name);
-                    builder.append(" LIKE '%");
-                    builder.append(value);
-                    builder.append("%' ");
-                } else if (dataType.equals("BIGINT")) {
-                    builder.append(name);
-                    builder.append("=");
-                    builder.append(value);
-                    builder.append(" ");
-                } else {
-                    builder.append(name);
-                    builder.append("=");
-                    builder.append(value);
-                    builder.append(" ");
-                }
-                if (i != (searchColumns.size() -1)) {
-                    builder.append("AND ");
-                }
-            }
-            textSearch = builder.toString();
-        }
         DbCmsPageGetDataCmd dbCmd = new DbCmsPageGetDataCmd(this.transId, this.channel, this.catalogId, textSearch
                 , this.pageIndex, CoreConfig.PAGE_SIZE, this.orderBy, this.status);
         this.executeDbCmd(dbCmd);

@@ -13,27 +13,31 @@ var dataSet = {
     init: function () {
         console.log("data set init");
     },
-    _renderDataTable: function (catalogId, columns) {
+    _renderDataTable: function (catalogId, columns, columnsSearch) {
         let instance = this;
         const url = config.host + "/o/catalog/get_data_detail?channel=cms&transId=123&catalogId=" + catalogId;
+        const da = {};
         instance.appSetting.dataTable = $("#datasetTable").DataTable({
             serverSide: true,
             process: true,
             ajax: {
                 url: url,
-                type: "GET"
+                type: "GET",
+                data: {
+                    "searchAdv" : JSON.stringify(columnsSearch)
+                }
             },
             responsive: true,
-            pageLength: 15,
+            lengthMenu: [[10, 25, 50, -1], [10, 25, 50, 100]],
             autoWidth: false,
             ordering: false,
-            lengthChange: false,
+            lengthChange: true,
             searching: true,
             bDestroy: true,
             language: app_message.language,
             paging: true,
             info: false,
-            dom: "lrtip",
+            //dom: "lrtip",
             columns: columns,
             "columnDefs": [
                 {
@@ -45,6 +49,10 @@ var dataSet = {
             "order": [
                 [1, 'asc']
             ],
+            initComplete: function(){
+                $("div.dataTables_filter").
+                append('<button class="btn btn-primary btn-sm btn-search-adv" onclick="dataSet.openAdvanceSearch()" type="button" id="btnSearchAdv">Tìm kiếm nâng cao</button>');
+            }
         });
 
         /*// Here we create the index column in jquery datatable
@@ -89,7 +97,6 @@ var dataSet = {
     renderDataSetDataTable: function (catalogId, columnSearch) {
         let instance = this;
         const catalogGetColumnUrl = config.host + "/o/catalog/get_detail_column?transId=kyzica&channel=cms&catalogId=" + catalogId;
-
         $.ajax({
             type: "GET",
             url: catalogGetColumnUrl,
@@ -110,7 +117,7 @@ var dataSet = {
                 });
                 const key = catalogId + "_columns";
                 localStorage.setItem(key, JSON.stringify(nestedCols));
-                instance._renderDataTable(catalogId, nestedCols);
+                instance._renderDataTable(catalogId, nestedCols, columnSearch);
             }
         });
         localStorage.removeItem("catalogId");
@@ -165,5 +172,8 @@ var dataSet = {
             $("#" + e.code).val("");
         });
         instance.renderDataSetDataTable(catalogId, []);
+    },
+    openAdvanceSearch: function (){
+        $('#advanceSearchModal').modal('toggle');
     }
 }

@@ -11,8 +11,9 @@ var app_message = {
         "lengthMenu": "Hiển thị _MENU_ bản ghi",
         "loadingRecords": "&nbsp;",
         "processing": "<div class='spinner' id='loadingDiv'></div>",
-        "search": "Tìm kiếm:",
+        "search": "",
         "zeroRecords": "Không tìm thấy dữ liệu",
+        "searchPlaceholder" : "Tìm kiếm ....",
         "paginate": {
             "first": "Đầu tiên",
             "last": "Cuối cùng",
@@ -23,5 +24,5 @@ var app_message = {
             "sortAscending": ": Hiển thị sắp xếp tăng dần",
             "sortDescending": ": Hiển thị sắp xếp giảm dần"
         }
-    },
-}
+    }
+};
