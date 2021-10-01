@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE routes PUBLIC "-//Liferay//DTD Friendly URL Routes 7.0.0//EN"
+        "http://www.liferay.com/dtd/liferay-friendly-url-routes_7_0_0.dtd">
+<routes>
+    <route>
+        <pattern>/view/{leaveId}</pattern>
+        <generated-parameter name="leaveId">{leaveId}</generated-parameter>
+        <implicit-parameter name="mvcRenderCommandName">viewleave_info</implicit-parameter>
+        <implicit-parameter name="p_p_lifecycle">0</implicit-parameter>
+        <implicit-parameter name="p_p_state">normal</implicit-parameter>
+        <implicit-parameter name="p_p_mode">view</implicit-parameter>
+        <implicit-parameter name="p_p_col_id">column-1</implicit-parameter>
+        <implicit-parameter name="p_p_col_count">1</implicit-parameter>
+    </route>
+</routes>

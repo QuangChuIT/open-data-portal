@@ -1,0 +1,4 @@
+Bundle-Name: navigation-portlet
+Bundle-SymbolicName: vn.vnpt.portlet.navigation
+Bundle-Version: 1.0.0
+Export-Package: vn.vnpt.portlet.navigation.constants
