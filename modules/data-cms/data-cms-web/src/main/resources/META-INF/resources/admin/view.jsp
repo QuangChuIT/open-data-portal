@@ -73,4 +73,37 @@
         </liferay-ui:search-container>
     </aui:form>
 </clay:container-fluid>
-
+<div aria-labelledby="uploadDataSetModal" class="fade modal" id="uploadDatasetModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title" id="uploadDataSetModalLaBel">
+                    <%=LanguageUtil.get(request, "upload-data-catalog-dialog-title")%>
+                </div>
+                <button aria-labelledby="Close" class="close" data-dismiss="modal" type="button" >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body upload-dataset-body">
+                <div class="progress" id="upload-data-process" style="height: 0.2rem;">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                         style="width: 0;">
+                    </div>
+                </div>
+                <div class="drag-area" id="drop-area">
+                    <div class="icon text-center"><i class="icon-cloud-upload" aria-hidden="true"></i></div>
+                    <header id="headerUpload" class="mb-2"><%=LanguageUtil.get(request, "click-to-upload")%>
+                    </header>
+                    <button class="btn btn-primary mb-3" id="uploadDataCat"><%=LanguageUtil.get(request, "upload")%>
+                    </button>
+                    <input type="hidden" name="catalogId" id="catalogId" value="">
+                    <input type="file" name="uploadInput" hidden id="uploadInput">
+                    <a href="javascript:void(0)" class="component-action" id="downloadUpload"
+                       onclick="catalog.downloadTmp()">
+                        <%=LanguageUtil.get(request, "template-catalog")%>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

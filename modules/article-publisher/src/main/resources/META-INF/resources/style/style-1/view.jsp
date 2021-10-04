@@ -47,15 +47,19 @@
                 </div>
                 <div class="row asset-summary">
                     <div class="col-md-3 asset-image">
-                        <c:if test='<%=Validator.isNotNull(topAssetImgPath) %>'>
-                            <a href="<%=assetLink%>">
-                                <img class="small-img" align="left"
-                                     src="<%= topAssetImgPath %>"
-                                     title="<%=assetCache.getTitle()%>"
-                                     onerror="this.src='/thumbnail/default-image.jpg'"
-                                 alt="<%=assetTitle%>"/>
-                            </a>
-                        </c:if>
+                        <c:choose>
+                            <c:when test='<%=Validator.isNotNull(topAssetImgPath) %>'>
+                                <a href="<%=assetLink%>">
+                                    <img class="small-img" align="left"
+                                         src="<%= topAssetImgPath %>"
+                                         title="<%=assetCache.getTitle()%>"
+                                         onerror="this.src='/thumbnail/default-image.jpg'"
+                                         alt="<%=assetTitle%>"/>
+                                </a>
+                            </c:when>
+                        </c:choose>
+
+
                     </div>
                     <div class="col-md-9">
                         <span class="summary-content"><%=topAssetSummary %></span>

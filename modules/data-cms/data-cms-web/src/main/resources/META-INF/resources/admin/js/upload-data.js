@@ -83,13 +83,16 @@ function uploadData(formData) {
             $('#upload-data-process').hide();
             if (data.error.code !== 0) {
                 $.notify(data.error.message, "error");
+                $("#uploadDataSetModal").modal('hide');
             } else {
                 $.notify(data.error.message, "Tải lên dữ liệu thành công")
+                $("#uploadDataSetModal").modal('hide');
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             $('#upload-data-process').hide();
             $.notify(textStatus, "error");
+            $("#uploadDataSetModal").modal('hide');
         }
     });
 }

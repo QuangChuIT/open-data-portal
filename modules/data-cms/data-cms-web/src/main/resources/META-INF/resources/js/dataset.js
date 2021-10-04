@@ -173,6 +173,8 @@ var dataSet = {
         instance.renderDataSetDataTable(catalogId, []);
     },
     openAdvanceSearch: function () {
-        $('#advanceSearchModal').modal('toggle');
+        $('#datasetAdvSearch').modal('toggle');
+    },
+    openUploadData: function () {
     }
 }

@@ -14,7 +14,10 @@
 
     Catalog catalogSelected = (Catalog) row.getObject();
 %>
-
+<portlet:renderURL var="uploadDataPopupUrl" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
+    <portlet:param name="mvcPath" value="/admin/common/upload_data.jsp"/>
+    <portlet:param name="catalogId" value="<%= String.valueOf(catalogSelected.getCatalogId()) %>"/>
+</portlet:renderURL>
 <liferay-ui:icon-menu
         direction="left-side"
         icon="<%= StringPool.BLANK %>"
@@ -48,18 +51,17 @@
                 message="permissions"
                 method="get"
                 url="<%= permissionsURL %>"
+
                 useDialog="<%= true %>"
         />
     </c:if>
     <c:if test="<%= DataCmsCatalogPermission.contains(permissionChecker, catalogSelected, DataCmsActionKeys.IMPORT_DATA_CATALOG) %>">
-        <portlet:renderURL var="uploadDataPopupUrl" windowState="<%=LiferayWindowState.POP_UP.toString()%>">
-            <portlet:param name="mvcPath" value="/admin/common/upload_data.jsp"/>
-            <portlet:param name="catalogId" value="<%= String.valueOf(catalogSelected.getCatalogId()) %>"/>
-        </portlet:renderURL>
         <input type="hidden" id="uploadDataPopupURL" value="<%=uploadDataPopupUrl%>">
+        <input type="hidden" id="catalogId" value="<%=catalogSelected.getCatalogId()%>">
         <liferay-ui:icon
                 message="upload-data"
                 url="javascript:void(0)"
+                id="uploadData"
                 onClick='<%= "event.preventDefault(); " + liferayPortletResponse.getNamespace() + "openPopup();" %>'
         />
     </c:if>
@@ -78,20 +80,8 @@
     </c:if>
 
 </liferay-ui:icon-menu>
-
 <script>
-    function <portlet:namespace/>openPopup(url) {
-        const URL = $("#uploadDataPopupURL").val();
-        Liferay.Util.openWindow({
-            dialog: {
-                centered: true,
-                height: 300,
-                modal: true,
-                width: 800
-            },
-            id: '<portlet:namespace/>uploadDataModal',
-            title: '<%=LanguageUtil.get(request, "upload-data-catalog-dialog-title")%>',
-            uri: URL
-        });
+    function <portlet:namespace/>openPopup() {
+        $("#uploadDataSetModal").modal({backdrop: 'static', keyboard: false});
     }
 </script>
