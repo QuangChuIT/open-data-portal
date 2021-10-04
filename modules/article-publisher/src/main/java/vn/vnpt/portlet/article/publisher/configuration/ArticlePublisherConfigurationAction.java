@@ -32,8 +32,10 @@ import java.util.Map;
 )
 public class ArticlePublisherConfigurationAction extends DefaultConfigurationAction {
     @Override
-    public void include(PortletConfig portletConfig, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
-        httpServletRequest.setAttribute(ArticlePublisherConfigurationAction.class.getName(), _articlePublisherConfiguration);
+    public void include(PortletConfig portletConfig, HttpServletRequest httpServletRequest,
+                        HttpServletResponse httpServletResponse) throws Exception {
+        httpServletRequest.setAttribute(ArticlePublisherConfigurationAction.class.getName(),
+                _articlePublisherConfiguration);
 
         super.include(portletConfig, httpServletRequest, httpServletResponse);
     }
