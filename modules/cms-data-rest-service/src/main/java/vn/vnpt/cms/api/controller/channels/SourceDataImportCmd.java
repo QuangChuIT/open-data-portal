@@ -55,6 +55,7 @@ public class SourceDataImportCmd extends AbsApiBaseParamReqTypeCmd {
             for (int i = 1; i < categoryFieldInfoList.size() + 1; ++i) {
                 Cell cell = headers.getCell(i);
                 importData = cell.getStringCellValue().trim().toLowerCase();
+                importData = importData.substring(0, importData.length() - 4);
                 if (!columns.contains(importData)) {
                     this.objResponse = new BaseResp(ResultCode.COLUNM_NAME_INVALID);
                     this.logger.info("Invalid column name !!!!!");

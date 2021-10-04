@@ -9,6 +9,7 @@ import vn.vnpt.cms.api.kernel.db.DBLogic;
 import vn.vnpt.cms.api.kernel.db.cmd.DBCommandBase;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -76,6 +77,13 @@ public class DBLogicImpl implements DBLogic {
                 this.setDone();
                 if (DBLogicImpl.this.logger.isDebugEnabled()) {
                     DBLogicImpl.this.logger.debug(("DBJob.run(): command invoked: " + this.getCommand()));
+                }
+                if(connection != null){
+                    try {
+                        connection.close();
+                    } catch (SQLException e) {
+                        DBLogicImpl.this.logger.error("DBJob.run():Caught '" + e + "'");
+                    }
                 }
             }
         }

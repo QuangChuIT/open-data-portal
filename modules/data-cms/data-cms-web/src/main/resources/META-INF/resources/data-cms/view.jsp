@@ -38,13 +38,10 @@
                 </li>
             </ul>
         </div>
-        <div class="catalog-desc">
+        <div class="catalog-desc mb-3">
             <%=catalog.getDescription()%>
         </div>
         <aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="assets-resources">
-            <div class="management-bar-light mb-2" id="catalogSearch">
-            </div>
-            <div id="catalogDataTable" class="mb-2"></div>
             <table id="datasetTable" class="table table-bordered table-hover" style="width:100%">
             </table>
             <div class="download-resource">
@@ -56,23 +53,36 @@
                 </button>
             </div>
         </aui:fieldset>
-
-        <!-- Modal -->
-        <div class="modal fade" id="advanceSearchModal" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+        <%-- Advance Search --%>
+        <div aria-labelledby="datasetAdvSearch" class="fade modal" id="datasetAdvSearch" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-full-screen-sm-down modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <div class="modal-title" id="clayDefaultModalLabel">
+                            Modal Title
+                        </div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <h4>Modal Body</h4>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <div class="modal-item-last">
+                            <div class="btn-group">
+                                <div class="btn-group-item">
+                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">
+                                        Close
+                                    </button>
+                                </div>
+                                <div class="btn-group-item">
+                                    <button class="btn btn-primary" type="button">
+                                        Primary
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

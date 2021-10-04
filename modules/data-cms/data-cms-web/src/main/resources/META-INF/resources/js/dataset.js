@@ -24,7 +24,7 @@ var dataSet = {
                 url: url,
                 type: "GET",
                 data: {
-                    "searchAdv" : JSON.stringify(columnsSearch)
+                    "searchAdv": JSON.stringify(columnsSearch)
                 }
             },
             responsive: true,
@@ -49,9 +49,8 @@ var dataSet = {
             "order": [
                 [1, 'asc']
             ],
-            initComplete: function(){
-                $("div.dataTables_filter").
-                append('<button class="btn btn-primary btn-sm btn-search-adv" onclick="dataSet.openAdvanceSearch()" type="button" id="btnSearchAdv">Tìm kiếm nâng cao</button>');
+            initComplete: function () {
+                $("div.dataTables_filter").append('<button class="btn btn-primary btn-sm btn-search-adv" onclick="dataSet.openAdvanceSearch()" type="button" id="btnSearchAdv">Tìm kiếm nâng cao</button>');
             }
         });
 
@@ -173,7 +172,10 @@ var dataSet = {
         });
         instance.renderDataSetDataTable(catalogId, []);
     },
-    openAdvanceSearch: function (){
-        $('#advanceSearchModal').modal('toggle');
+    openAdvanceSearch: function () {
+        $('#datasetAdvSearch').modal('toggle');
+    },
+    openUploadData: function () {
+
     }
 }
