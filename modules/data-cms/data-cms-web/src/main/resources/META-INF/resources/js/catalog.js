@@ -101,7 +101,7 @@ var catalog = {
     downloadFile: function (type, catalogId) {
         console.log("Download !!!!!!");
         const url = config.host + "/o/source_data/export?type=" + type + "&catalogId=" + catalogId;
-        let link=document.createElement('a');
+        let link = document.createElement('a');
         link.href = url;
         link.download = url.substr(url.lastIndexOf('/') + 1);
         link.click();

@@ -28,7 +28,7 @@ $(function () {
 
         fd.append('file', file[0]);
 
-        uploadData(fd);
+        uploadData(fd, e);
     });
 
     // Open file selector on div click
@@ -37,19 +37,22 @@ $(function () {
     });
 
     // file selected
-    $("#uploadInput").change(function () {
+    $("#uploadInput").change(function (e) {
+        e.preventDefault();
         var fd = new FormData();
 
         var files = $('#uploadInput')[0].files[0];
 
         fd.append('file', files);
 
-        uploadData(fd);
+        uploadData(fd, e);
     });
 });
 
 // Sending AJAX request and upload file
-function uploadData(formData) {
+function uploadData(formData, event) {
+    console.log("Upload data !!!!");
+    event.preventDefault();
     // Get form
     let catalogId = $("#catalogId").val();
     $.ajax({
@@ -83,16 +86,16 @@ function uploadData(formData) {
             $('#upload-data-process').hide();
             if (data.error.code !== 0) {
                 $.notify(data.error.message, "error");
-                $("#uploadDataSetModal").modal('hide');
+                $("#uploadDatasetModal").modal('hide');
             } else {
                 $.notify(data.error.message, "Tải lên dữ liệu thành công")
-                $("#uploadDataSetModal").modal('hide');
+                $("#uploadDatasetModal").modal('hide');
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             $('#upload-data-process').hide();
             $.notify(textStatus, "error");
-            $("#uploadDataSetModal").modal('hide');
+            $("#uploadDatasetModal").modal('hide');
         }
     });
 }

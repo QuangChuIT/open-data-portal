@@ -59,14 +59,14 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title" id="clayDefaultModalLabel">
-                            Modal Title
+                            <%=LanguageUtil.get(request,"advanced-search")%>
                         </div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <h4>Modal Body</h4>
+                    <div class="modal-body" id="advSearchContainer">
+
                     </div>
                     <div class="modal-footer">
                         <div class="modal-item-last">
@@ -95,9 +95,10 @@
     }
 </script>
 <script id="catalogSearchForm" type="text/x-jQuery-tmpl">
-    <div class="row mb-2">
+    <form id="formSearchData">
         {{each columns}}
-            <div class="col-md-3">
+            <div class="form-group">
+            <label for="${code}">${name}</label>
             {{if dataType == "VARCHAR"}}
                <input class="form-control" id="${code}" type="text" name="${code}" placeholder="${name}">
             {{else dataType == "BIGINT" }}
@@ -107,17 +108,14 @@
             {{/if}}
             </div>
         {{/each}}
-    </div>
+    </form>
     <div class="row">
-        <div class="col-md-6">
-            <button type="button" class="btn btn-primary" onclick="dataSet.searchData()">
+        <button type="button" class="btn btn-primary" onclick="dataSet.searchData()">
                 <i class="icon-search"></i> <%=LanguageUtil.get(request, "search")%>
             </button>
 
             <button type="button" class="btn btn-light" onclick="dataSet.clearSearch()">
                 <i class="icon-eraser"></i> <%=LanguageUtil.get(request, "cancel")%>
             </button>
-        </div>
     </div>
-
 </script>

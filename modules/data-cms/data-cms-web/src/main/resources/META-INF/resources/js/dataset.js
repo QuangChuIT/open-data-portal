@@ -16,7 +16,6 @@ var dataSet = {
     _renderDataTable: function (catalogId, columns, columnsSearch) {
         let instance = this;
         const url = config.host + "/o/catalog/get_data_detail?channel=cms&transId=123&catalogId=" + catalogId;
-        const da = {};
         instance.appSetting.dataTable = $("#datasetTable").DataTable({
             serverSide: true,
             process: true,
@@ -50,50 +49,24 @@ var dataSet = {
                 [1, 'asc']
             ],
             initComplete: function () {
-                $("div.dataTables_filter").append('<button class="btn btn-primary btn-sm btn-search-adv" onclick="dataSet.openAdvanceSearch()" type="button" id="btnSearchAdv">Tìm kiếm nâng cao</button>');
+                $("div.dataTables_filter")
+                    .append('<button class="btn btn-primary btn-sm btn-search-adv" ' +
+                        'onclick="dataSet.openAdvanceSearch()" type="button" id="btnSearchAdv">Tìm kiếm nâng cao</button>');
             }
         });
 
-        /*// Here we create the index column in jquery datatable
-        instance.appSetting.dataTable.on('order.dt search.dt', function() {
-            instance.appSetting.dataTable.column(0, {
-                search: 'applied',
-                order: 'applied'
-            }).nodes().each(function(cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();*/
-    },
-    _renderDataTable_YUI(columns, datas) {
-        console.log("Start rendering datatable with columns size: " + columns.length + " and data length: " + datas.length);
-        $("#catalogDataTable").empty();
-        // build datatable
-        YUI().use(
-            'aui-datatable',
-            'aui-datatype',
-            'datatable-sort',
-            'aui-pagination',
-            function (Y) {
-                const dataTable = new Y.DataTable(
-                    {
-                        columns: columns,
-                        data: datas,
-                        plugins: [
-                            {
-                                cfg: {
-                                    highlightRange: false
-                                },
-                                fn: Y.Plugin.DataTableHighlight
-                            }
-                        ]
-                    }
-                ).render('#catalogDataTable');
-
-                dataTable.get('boundingBox').unselectable();
-            }
-        );
+        // Here we create the index column in jquery datatable
+        /* instance.appSetting.dataTable.on('order.dt search.dt', function() {
+             instance.appSetting.dataTable.column(0, {
+                 search: 'applied',
+                 order: 'applied'
+             }).nodes().each(function(cell, i) {
+                 cell.innerHTML = i + 1;
+             });
+         }).draw();*/
     },
     renderDataSetDataTable: function (catalogId, columnSearch) {
+        console.log("Get Data catalog " + catalogId + " column size: " + columnSearch.length);
         let instance = this;
         const catalogGetColumnUrl = config.host + "/o/catalog/get_detail_column?transId=kyzica&channel=cms&catalogId=" + catalogId;
         $.ajax({
@@ -114,13 +87,14 @@ var dataSet = {
                     column.searchable = item.isSearch;
                     nestedCols.push(column);
                 });
+                StorageService.deleteItems("_columns");
                 const key = catalogId + "_columns";
-                localStorage.setItem(key, JSON.stringify(nestedCols));
+                StorageService.setItem(key, JSON.stringify(nestedCols));
                 instance._renderDataTable(catalogId, nestedCols, columnSearch);
             }
         });
-        localStorage.removeItem("catalogId");
-        localStorage.setItem("catalogId", catalogId);
+        StorageService.deleteItem("catalogId");
+        StorageService.setItem("catalogId", catalogId);
     },
     _filterColumnSearch(columns) {
         if (columns.length === 0) {
@@ -131,8 +105,8 @@ var dataSet = {
     createFormSearch: function (columns) {
         let instance = this;
         let columnSearch = instance._filterColumnSearch(columns);
-        localStorage.removeItem("columnSearch");
-        localStorage.setItem("columnSearch", JSON.stringify(columnSearch));
+        StorageService.deleteItem("columnSearch");
+        StorageService.setItem("columnSearch", JSON.stringify(columnSearch));
         const lengthColumn = columnSearch.length + 2;
         let numberRow = Math.ceil(lengthColumn / 4);
         const dataCfg = {};
@@ -143,7 +117,7 @@ var dataSet = {
         }
         dataCfg.columns = columnSearch;
         $("#catalogSearch").empty();
-        $("#catalogSearchForm").tmpl(dataCfg).appendTo("#catalogSearch");
+        $("#catalogSearchForm").tmpl(dataCfg).appendTo("#advSearchContainer");
     },
     searchData: function () {
         let instance = this;
@@ -159,14 +133,14 @@ var dataSet = {
                 searchRequest.push(columnSearch);
             }
         });
-        let catalogId = localStorage.getItem("catalogId");
+        let catalogId = StorageService.getItem("catalogId");
         instance.renderDataSetDataTable(catalogId, searchRequest);
     },
     clearSearch: function () {
         let instance = this;
         console.log("Clear search now");
-        let columns = JSON.parse(localStorage.getItem("columnSearch"));
-        let catalogId = localStorage.getItem("catalogId");
+        let columns = JSON.parse(StorageService.getItem("columnSearch"));
+        let catalogId = StorageService.getItem("catalogId");
         columns.forEach(function (e) {
             $("#" + e.code).val("");
         });

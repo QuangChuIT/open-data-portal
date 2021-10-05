@@ -47,7 +47,7 @@ public class SourceDataImportCmd extends AbsApiBaseParamReqTypeCmd {
                 columns.add(fileName);
                 mapColumnName.put(categoryFieldInfo.getName(), categoryFieldInfo.getCode());
             }
-            
+
             Sheet sheet = workbook.getSheetAt(0);
             Row headers = sheet.getRow(0);
 
@@ -55,7 +55,9 @@ public class SourceDataImportCmd extends AbsApiBaseParamReqTypeCmd {
             for (int i = 1; i < categoryFieldInfoList.size() + 1; ++i) {
                 Cell cell = headers.getCell(i);
                 importData = cell.getStringCellValue().trim().toLowerCase();
-                importData = importData.substring(0, importData.length() - 4);
+                if (importData.contains("*")) {
+                    importData = importData.substring(0, importData.length() - 4);
+                }
                 if (!columns.contains(importData)) {
                     this.objResponse = new BaseResp(ResultCode.COLUNM_NAME_INVALID);
                     this.logger.info("Invalid column name !!!!!");
@@ -141,7 +143,9 @@ public class SourceDataImportCmd extends AbsApiBaseParamReqTypeCmd {
                             } else {
                                 value = cell.getStringCellValue();
                             }
-
+                            if (key.contains("*")) {
+                                key = key.substring(0, key.length() - 4);
+                            }
                             mapValues.put(key, value);
                         }
                     }

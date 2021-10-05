@@ -13,7 +13,7 @@ var app_message = {
         "processing": "<div class='spinner' id='loadingDiv'></div>",
         "search": "",
         "zeroRecords": "Không tìm thấy dữ liệu",
-        "searchPlaceholder" : "Tìm kiếm ....",
+        "searchPlaceholder": "Tìm kiếm ....",
         "paginate": {
             "first": "Đầu tiên",
             "last": "Cuối cùng",

@@ -2,7 +2,7 @@
 <%@ include file="/admin/common/init.jsp" %>
 
 <%
-    DataCmsAdminNavigationDisplayContext dataCmsAdminNavigationDisplayContext = new DataCmsAdminNavigationDisplayContext(request,liferayPortletResponse);
+    DataCmsAdminNavigationDisplayContext dataCmsAdminNavigationDisplayContext = new DataCmsAdminNavigationDisplayContext(request, liferayPortletResponse);
 %>
 
 <clay:navigation-bar
