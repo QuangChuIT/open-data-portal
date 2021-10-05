@@ -73,7 +73,7 @@
         </liferay-ui:search-container>
     </aui:form>
 </clay:container-fluid>
-<div aria-labelledby="uploadDataSetModal" class="fade modal" id="uploadDatasetModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+<div aria-labelledby="uploadDatasetModal" class="fade modal" id="uploadDatasetModal" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -98,7 +98,7 @@
                     </button>
                     <input type="hidden" name="catalogId" id="catalogId" value="">
                     <input type="file" name="uploadInput" hidden id="uploadInput">
-                    <a href="javascript:void(0)" class="component-action" id="downloadUpload"
+                    <a href="javascript:void(0)" id="downloadUpload"
                        onclick="catalog.downloadTmp()">
                         <%=LanguageUtil.get(request, "template-catalog")%>
                     </a>

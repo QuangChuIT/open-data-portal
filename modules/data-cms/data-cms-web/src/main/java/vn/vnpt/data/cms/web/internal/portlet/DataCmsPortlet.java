@@ -16,6 +16,7 @@ import javax.portlet.Portlet;
                 "com.liferay.portlet.css-class-wrapper=data-cms-portlet",
                 "com.liferay.portlet.display-category=category.cms",
                 "com.liferay.portlet.header-portlet-css=/css/main.css",
+                "com.liferay.portlet.header-portlet-javascript=/js/common.js",
                 "com.liferay.portlet.header-portlet-javascript=/js/app-message.js",
                 "com.liferay.portlet.header-portlet-javascript=/js/dataset.js",
                 "com.liferay.portlet.header-portlet-javascript=/js/catalog.js",

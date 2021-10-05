@@ -1,5 +1,4 @@
 <%@ page import="com.liferay.portal.kernel.bean.BeanParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="vn.vnpt.data.cms.contansts.DataCmsPortletKeys" %>
 <%@ page import="vn.vnpt.data.cms.model.Catalog" %>
 <%@ include file="/admin/common/init.jsp" %>
