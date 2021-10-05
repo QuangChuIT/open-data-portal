@@ -1,4 +1,5 @@
-create index IX_ADD1806E on VNPT_Catalog (groupId);
+create index IX_C1F77154 on VNPT_Catalog (groupId, status);
+create index IX_991FAAA2 on VNPT_Catalog (status);
 create index IX_1AC572B0 on VNPT_Catalog (uuid_[$COLUMN_LENGTH:75$], companyId);
 create unique index IX_836AE532 on VNPT_Catalog (uuid_[$COLUMN_LENGTH:75$], groupId);
 

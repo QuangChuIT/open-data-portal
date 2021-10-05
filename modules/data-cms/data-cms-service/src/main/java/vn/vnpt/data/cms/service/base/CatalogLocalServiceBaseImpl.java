@@ -648,4 +648,6 @@ public abstract class CatalogLocalServiceBaseImpl
 	protected com.liferay.asset.kernel.service.AssetTagLocalService
 		assetTagLocalService;
 
+	@Reference
+	protected com.liferay.asset.kernel.service.AssetLinkLocalService assetLinkLocalService;
 }

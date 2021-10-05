@@ -774,6 +774,433 @@ public class CatalogUtil {
 	}
 
 	/**
+	 * Returns all the catalogs where status = &#63;.
+	 *
+	 * @param status the status
+	 * @return the matching catalogs
+	 */
+	public static List<Catalog> findByStatus(int status) {
+		return getPersistence().findByStatus(status);
+	}
+
+	/**
+	 * Returns a range of all the catalogs where status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @return the range of matching catalogs
+	 */
+	public static List<Catalog> findByStatus(int status, int start, int end) {
+		return getPersistence().findByStatus(status, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the catalogs where status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching catalogs
+	 */
+	public static List<Catalog> findByStatus(
+		int status, int start, int end,
+		OrderByComparator<Catalog> orderByComparator) {
+
+		return getPersistence().findByStatus(
+			status, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the catalogs where status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching catalogs
+	 */
+	public static List<Catalog> findByStatus(
+		int status, int start, int end,
+		OrderByComparator<Catalog> orderByComparator, boolean useFinderCache) {
+
+		return getPersistence().findByStatus(
+			status, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns the first catalog in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching catalog
+	 * @throws NoSuchCatalogException if a matching catalog could not be found
+	 */
+	public static Catalog findByStatus_First(
+			int status, OrderByComparator<Catalog> orderByComparator)
+		throws vn.vnpt.data.cms.exception.NoSuchCatalogException {
+
+		return getPersistence().findByStatus_First(status, orderByComparator);
+	}
+
+	/**
+	 * Returns the first catalog in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching catalog, or <code>null</code> if a matching catalog could not be found
+	 */
+	public static Catalog fetchByStatus_First(
+		int status, OrderByComparator<Catalog> orderByComparator) {
+
+		return getPersistence().fetchByStatus_First(status, orderByComparator);
+	}
+
+	/**
+	 * Returns the last catalog in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching catalog
+	 * @throws NoSuchCatalogException if a matching catalog could not be found
+	 */
+	public static Catalog findByStatus_Last(
+			int status, OrderByComparator<Catalog> orderByComparator)
+		throws vn.vnpt.data.cms.exception.NoSuchCatalogException {
+
+		return getPersistence().findByStatus_Last(status, orderByComparator);
+	}
+
+	/**
+	 * Returns the last catalog in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching catalog, or <code>null</code> if a matching catalog could not be found
+	 */
+	public static Catalog fetchByStatus_Last(
+		int status, OrderByComparator<Catalog> orderByComparator) {
+
+		return getPersistence().fetchByStatus_Last(status, orderByComparator);
+	}
+
+	/**
+	 * Returns the catalogs before and after the current catalog in the ordered set where status = &#63;.
+	 *
+	 * @param catalogId the primary key of the current catalog
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next catalog
+	 * @throws NoSuchCatalogException if a catalog with the primary key could not be found
+	 */
+	public static Catalog[] findByStatus_PrevAndNext(
+			long catalogId, int status,
+			OrderByComparator<Catalog> orderByComparator)
+		throws vn.vnpt.data.cms.exception.NoSuchCatalogException {
+
+		return getPersistence().findByStatus_PrevAndNext(
+			catalogId, status, orderByComparator);
+	}
+
+	/**
+	 * Removes all the catalogs where status = &#63; from the database.
+	 *
+	 * @param status the status
+	 */
+	public static void removeByStatus(int status) {
+		getPersistence().removeByStatus(status);
+	}
+
+	/**
+	 * Returns the number of catalogs where status = &#63;.
+	 *
+	 * @param status the status
+	 * @return the number of matching catalogs
+	 */
+	public static int countByStatus(int status) {
+		return getPersistence().countByStatus(status);
+	}
+
+	/**
+	 * Returns all the catalogs where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the matching catalogs
+	 */
+	public static List<Catalog> findByG_S(long groupId, int status) {
+		return getPersistence().findByG_S(groupId, status);
+	}
+
+	/**
+	 * Returns a range of all the catalogs where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @return the range of matching catalogs
+	 */
+	public static List<Catalog> findByG_S(
+		long groupId, int status, int start, int end) {
+
+		return getPersistence().findByG_S(groupId, status, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the catalogs where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching catalogs
+	 */
+	public static List<Catalog> findByG_S(
+		long groupId, int status, int start, int end,
+		OrderByComparator<Catalog> orderByComparator) {
+
+		return getPersistence().findByG_S(
+			groupId, status, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the catalogs where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching catalogs
+	 */
+	public static List<Catalog> findByG_S(
+		long groupId, int status, int start, int end,
+		OrderByComparator<Catalog> orderByComparator, boolean useFinderCache) {
+
+		return getPersistence().findByG_S(
+			groupId, status, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns the first catalog in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching catalog
+	 * @throws NoSuchCatalogException if a matching catalog could not be found
+	 */
+	public static Catalog findByG_S_First(
+			long groupId, int status,
+			OrderByComparator<Catalog> orderByComparator)
+		throws vn.vnpt.data.cms.exception.NoSuchCatalogException {
+
+		return getPersistence().findByG_S_First(
+			groupId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the first catalog in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching catalog, or <code>null</code> if a matching catalog could not be found
+	 */
+	public static Catalog fetchByG_S_First(
+		long groupId, int status,
+		OrderByComparator<Catalog> orderByComparator) {
+
+		return getPersistence().fetchByG_S_First(
+			groupId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the last catalog in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching catalog
+	 * @throws NoSuchCatalogException if a matching catalog could not be found
+	 */
+	public static Catalog findByG_S_Last(
+			long groupId, int status,
+			OrderByComparator<Catalog> orderByComparator)
+		throws vn.vnpt.data.cms.exception.NoSuchCatalogException {
+
+		return getPersistence().findByG_S_Last(
+			groupId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the last catalog in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching catalog, or <code>null</code> if a matching catalog could not be found
+	 */
+	public static Catalog fetchByG_S_Last(
+		long groupId, int status,
+		OrderByComparator<Catalog> orderByComparator) {
+
+		return getPersistence().fetchByG_S_Last(
+			groupId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns the catalogs before and after the current catalog in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param catalogId the primary key of the current catalog
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next catalog
+	 * @throws NoSuchCatalogException if a catalog with the primary key could not be found
+	 */
+	public static Catalog[] findByG_S_PrevAndNext(
+			long catalogId, long groupId, int status,
+			OrderByComparator<Catalog> orderByComparator)
+		throws vn.vnpt.data.cms.exception.NoSuchCatalogException {
+
+		return getPersistence().findByG_S_PrevAndNext(
+			catalogId, groupId, status, orderByComparator);
+	}
+
+	/**
+	 * Returns all the catalogs that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the matching catalogs that the user has permission to view
+	 */
+	public static List<Catalog> filterFindByG_S(long groupId, int status) {
+		return getPersistence().filterFindByG_S(groupId, status);
+	}
+
+	/**
+	 * Returns a range of all the catalogs that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @return the range of matching catalogs that the user has permission to view
+	 */
+	public static List<Catalog> filterFindByG_S(
+		long groupId, int status, int start, int end) {
+
+		return getPersistence().filterFindByG_S(groupId, status, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the catalogs that the user has permissions to view where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching catalogs that the user has permission to view
+	 */
+	public static List<Catalog> filterFindByG_S(
+		long groupId, int status, int start, int end,
+		OrderByComparator<Catalog> orderByComparator) {
+
+		return getPersistence().filterFindByG_S(
+			groupId, status, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns the catalogs before and after the current catalog in the ordered set of catalogs that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * @param catalogId the primary key of the current catalog
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next catalog
+	 * @throws NoSuchCatalogException if a catalog with the primary key could not be found
+	 */
+	public static Catalog[] filterFindByG_S_PrevAndNext(
+			long catalogId, long groupId, int status,
+			OrderByComparator<Catalog> orderByComparator)
+		throws vn.vnpt.data.cms.exception.NoSuchCatalogException {
+
+		return getPersistence().filterFindByG_S_PrevAndNext(
+			catalogId, groupId, status, orderByComparator);
+	}
+
+	/**
+	 * Removes all the catalogs where groupId = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 */
+	public static void removeByG_S(long groupId, int status) {
+		getPersistence().removeByG_S(groupId, status);
+	}
+
+	/**
+	 * Returns the number of catalogs where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the number of matching catalogs
+	 */
+	public static int countByG_S(long groupId, int status) {
+		return getPersistence().countByG_S(groupId, status);
+	}
+
+	/**
+	 * Returns the number of catalogs that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the number of matching catalogs that the user has permission to view
+	 */
+	public static int filterCountByG_S(long groupId, int status) {
+		return getPersistence().filterCountByG_S(groupId, status);
+	}
+
+	/**
 	 * Caches the catalog in the entity cache if it is enabled.
 	 *
 	 * @param catalog the catalog

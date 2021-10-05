@@ -155,6 +155,14 @@ public class CatalogLocalServiceUtil {
 		return getService().deleteCatalog(catalogId);
 	}
 
+	public static Catalog deleteCatalog(
+			long catalogId,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException {
+
+		return getService().deleteCatalog(catalogId, serviceContext);
+	}
+
 	/**
 	 * @throws PortalException
 	 */
@@ -411,6 +419,17 @@ public class CatalogLocalServiceUtil {
 	 */
 	public static Catalog updateCatalog(Catalog catalog) {
 		return getService().updateCatalog(catalog);
+	}
+
+	public static Catalog updateCatalog(
+			long catalogId, long userId, String tableName, String title,
+			String description, String version, boolean visibility,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws PortalException {
+
+		return getService().updateCatalog(
+			catalogId, userId, tableName, title, description, version,
+			visibility, serviceContext);
 	}
 
 	public static CatalogLocalService getService() {

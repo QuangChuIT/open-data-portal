@@ -156,6 +156,15 @@ public class CatalogLocalServiceWrapper
 		return _catalogLocalService.deleteCatalog(catalogId);
 	}
 
+	@Override
+	public vn.vnpt.data.cms.model.Catalog deleteCatalog(
+			long catalogId,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _catalogLocalService.deleteCatalog(catalogId, serviceContext);
+	}
+
 	/**
 	 * @throws PortalException
 	 */
@@ -458,6 +467,18 @@ public class CatalogLocalServiceWrapper
 		vn.vnpt.data.cms.model.Catalog catalog) {
 
 		return _catalogLocalService.updateCatalog(catalog);
+	}
+
+	@Override
+	public vn.vnpt.data.cms.model.Catalog updateCatalog(
+			long catalogId, long userId, String tableName, String title,
+			String description, String version, boolean visibility,
+			com.liferay.portal.kernel.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _catalogLocalService.updateCatalog(
+			catalogId, userId, tableName, title, description, version,
+			visibility, serviceContext);
 	}
 
 	@Override

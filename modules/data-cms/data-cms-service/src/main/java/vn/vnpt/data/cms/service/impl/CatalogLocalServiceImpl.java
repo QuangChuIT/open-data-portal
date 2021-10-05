@@ -14,6 +14,7 @@
 
 package vn.vnpt.data.cms.service.impl;
 
+import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -21,6 +22,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.permission.ModelPermissions;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import org.osgi.service.component.annotations.Component;
@@ -52,7 +54,8 @@ import java.util.UUID;
 public class CatalogLocalServiceImpl extends CatalogLocalServiceBaseImpl {
 
     public Catalog addCatalog(long userId, String tableName,
-                              String title, String description, String version, boolean visibility, ServiceContext serviceContext) throws PortalException {
+                              String title, String description, String version,
+                              boolean visibility, ServiceContext serviceContext) throws PortalException {
         _log.info("Starting add catalog to db !!!!");
         User user = userLocalService.getUserById(userId);
 
@@ -87,6 +90,61 @@ public class CatalogLocalServiceImpl extends CatalogLocalServiceBaseImpl {
         } else {
             addCatalogResources(catalog, serviceContext.getModelPermissions());
         }
+
+        AssetEntry assetEntry = assetEntryLocalService.updateEntry(userId,
+                groupId, catalog.getCreateDate(),
+                catalog.getModifiedDate(), Catalog.class.getName(),
+                catalogId, catalog.getUuid(), 0,
+                serviceContext.getAssetCategoryIds(),
+                serviceContext.getAssetTagNames(), true, true, null, null, null, null,
+                ContentTypes.TEXT_HTML, catalog.getTitle(), catalog.getDescription(), catalog.getDescription(), null,
+                null, 0, 0, null);
+
+        return catalog;
+    }
+
+    public Catalog updateCatalog(long catalogId, long userId, String tableName,
+                                 String title, String description, String version,
+                                 boolean visibility, ServiceContext serviceContext) throws PortalException {
+        Date now = new Date();
+        validate(title);
+        Catalog catalog = getCatalog(catalogId);
+
+        User user = userLocalService.getUser(userId);
+
+        catalog.setUserId(userId);
+        catalog.setUserName(user.getFullName());
+        catalog.setModifiedDate(serviceContext.getModifiedDate(now));
+        catalog.setTitle(title);
+        catalog.setDescription(description);
+        catalog.setVersion(version);
+        catalog.setTableName(tableName);
+        catalog.setVisibility(visibility);
+        catalog.setExpandoBridgeAttributes(serviceContext);
+
+        catalogPersistence.update(catalog);
+
+        AssetEntry assetEntry = assetEntryLocalService.updateEntry(catalog.getUserId(),
+                catalog.getGroupId(), catalog.getCreateDate(),
+                catalog.getModifiedDate(), Catalog.class.getName(),
+                catalogId, catalog.getUuid(), 0,
+                serviceContext.getAssetCategoryIds(),
+                serviceContext.getAssetTagNames(), true, true, catalog.getCreateDate(),
+                null, null, null, ContentTypes.TEXT_HTML, catalog.getTitle(), catalog.getDescription(), catalog.getDescription(),
+                null, null, 0, 0, serviceContext.getAssetPriority());
+        return catalog;
+    }
+
+    public Catalog deleteCatalog(long catalogId, ServiceContext serviceContext) throws PortalException {
+        Catalog catalog = getCatalog(catalogId);
+
+        catalog = deleteCatalog(catalog);
+
+        AssetEntry assetEntry = assetEntryLocalService.fetchEntry(
+                Catalog.class.getName(), catalogId);
+
+        assetEntryLocalService.deleteEntry(assetEntry);
+
         return catalog;
     }
 

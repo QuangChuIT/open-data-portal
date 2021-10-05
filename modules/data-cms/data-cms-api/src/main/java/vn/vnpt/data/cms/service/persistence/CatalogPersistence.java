@@ -595,6 +595,371 @@ public interface CatalogPersistence extends BasePersistence<Catalog> {
 	public int filterCountByGroupId(long groupId);
 
 	/**
+	 * Returns all the catalogs where status = &#63;.
+	 *
+	 * @param status the status
+	 * @return the matching catalogs
+	 */
+	public java.util.List<Catalog> findByStatus(int status);
+
+	/**
+	 * Returns a range of all the catalogs where status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @return the range of matching catalogs
+	 */
+	public java.util.List<Catalog> findByStatus(int status, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the catalogs where status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching catalogs
+	 */
+	public java.util.List<Catalog> findByStatus(
+		int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+			orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the catalogs where status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching catalogs
+	 */
+	public java.util.List<Catalog> findByStatus(
+		int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+			orderByComparator,
+		boolean useFinderCache);
+
+	/**
+	 * Returns the first catalog in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching catalog
+	 * @throws NoSuchCatalogException if a matching catalog could not be found
+	 */
+	public Catalog findByStatus_First(
+			int status,
+			com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+				orderByComparator)
+		throws NoSuchCatalogException;
+
+	/**
+	 * Returns the first catalog in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching catalog, or <code>null</code> if a matching catalog could not be found
+	 */
+	public Catalog fetchByStatus_First(
+		int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+			orderByComparator);
+
+	/**
+	 * Returns the last catalog in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching catalog
+	 * @throws NoSuchCatalogException if a matching catalog could not be found
+	 */
+	public Catalog findByStatus_Last(
+			int status,
+			com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+				orderByComparator)
+		throws NoSuchCatalogException;
+
+	/**
+	 * Returns the last catalog in the ordered set where status = &#63;.
+	 *
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching catalog, or <code>null</code> if a matching catalog could not be found
+	 */
+	public Catalog fetchByStatus_Last(
+		int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+			orderByComparator);
+
+	/**
+	 * Returns the catalogs before and after the current catalog in the ordered set where status = &#63;.
+	 *
+	 * @param catalogId the primary key of the current catalog
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next catalog
+	 * @throws NoSuchCatalogException if a catalog with the primary key could not be found
+	 */
+	public Catalog[] findByStatus_PrevAndNext(
+			long catalogId, int status,
+			com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+				orderByComparator)
+		throws NoSuchCatalogException;
+
+	/**
+	 * Removes all the catalogs where status = &#63; from the database.
+	 *
+	 * @param status the status
+	 */
+	public void removeByStatus(int status);
+
+	/**
+	 * Returns the number of catalogs where status = &#63;.
+	 *
+	 * @param status the status
+	 * @return the number of matching catalogs
+	 */
+	public int countByStatus(int status);
+
+	/**
+	 * Returns all the catalogs where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the matching catalogs
+	 */
+	public java.util.List<Catalog> findByG_S(long groupId, int status);
+
+	/**
+	 * Returns a range of all the catalogs where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @return the range of matching catalogs
+	 */
+	public java.util.List<Catalog> findByG_S(
+		long groupId, int status, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the catalogs where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching catalogs
+	 */
+	public java.util.List<Catalog> findByG_S(
+		long groupId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+			orderByComparator);
+
+	/**
+	 * Returns an ordered range of all the catalogs where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching catalogs
+	 */
+	public java.util.List<Catalog> findByG_S(
+		long groupId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+			orderByComparator,
+		boolean useFinderCache);
+
+	/**
+	 * Returns the first catalog in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching catalog
+	 * @throws NoSuchCatalogException if a matching catalog could not be found
+	 */
+	public Catalog findByG_S_First(
+			long groupId, int status,
+			com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+				orderByComparator)
+		throws NoSuchCatalogException;
+
+	/**
+	 * Returns the first catalog in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching catalog, or <code>null</code> if a matching catalog could not be found
+	 */
+	public Catalog fetchByG_S_First(
+		long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+			orderByComparator);
+
+	/**
+	 * Returns the last catalog in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching catalog
+	 * @throws NoSuchCatalogException if a matching catalog could not be found
+	 */
+	public Catalog findByG_S_Last(
+			long groupId, int status,
+			com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+				orderByComparator)
+		throws NoSuchCatalogException;
+
+	/**
+	 * Returns the last catalog in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching catalog, or <code>null</code> if a matching catalog could not be found
+	 */
+	public Catalog fetchByG_S_Last(
+		long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+			orderByComparator);
+
+	/**
+	 * Returns the catalogs before and after the current catalog in the ordered set where groupId = &#63; and status = &#63;.
+	 *
+	 * @param catalogId the primary key of the current catalog
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next catalog
+	 * @throws NoSuchCatalogException if a catalog with the primary key could not be found
+	 */
+	public Catalog[] findByG_S_PrevAndNext(
+			long catalogId, long groupId, int status,
+			com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+				orderByComparator)
+		throws NoSuchCatalogException;
+
+	/**
+	 * Returns all the catalogs that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the matching catalogs that the user has permission to view
+	 */
+	public java.util.List<Catalog> filterFindByG_S(long groupId, int status);
+
+	/**
+	 * Returns a range of all the catalogs that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @return the range of matching catalogs that the user has permission to view
+	 */
+	public java.util.List<Catalog> filterFindByG_S(
+		long groupId, int status, int start, int end);
+
+	/**
+	 * Returns an ordered range of all the catalogs that the user has permissions to view where groupId = &#63; and status = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>CatalogModelImpl</code>.
+	 * </p>
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param start the lower bound of the range of catalogs
+	 * @param end the upper bound of the range of catalogs (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching catalogs that the user has permission to view
+	 */
+	public java.util.List<Catalog> filterFindByG_S(
+		long groupId, int status, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+			orderByComparator);
+
+	/**
+	 * Returns the catalogs before and after the current catalog in the ordered set of catalogs that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * @param catalogId the primary key of the current catalog
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next catalog
+	 * @throws NoSuchCatalogException if a catalog with the primary key could not be found
+	 */
+	public Catalog[] filterFindByG_S_PrevAndNext(
+			long catalogId, long groupId, int status,
+			com.liferay.portal.kernel.util.OrderByComparator<Catalog>
+				orderByComparator)
+		throws NoSuchCatalogException;
+
+	/**
+	 * Removes all the catalogs where groupId = &#63; and status = &#63; from the database.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 */
+	public void removeByG_S(long groupId, int status);
+
+	/**
+	 * Returns the number of catalogs where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the number of matching catalogs
+	 */
+	public int countByG_S(long groupId, int status);
+
+	/**
+	 * Returns the number of catalogs that the user has permission to view where groupId = &#63; and status = &#63;.
+	 *
+	 * @param groupId the group ID
+	 * @param status the status
+	 * @return the number of matching catalogs that the user has permission to view
+	 */
+	public int filterCountByG_S(long groupId, int status);
+
+	/**
 	 * Caches the catalog in the entity cache if it is enabled.
 	 *
 	 * @param catalog the catalog

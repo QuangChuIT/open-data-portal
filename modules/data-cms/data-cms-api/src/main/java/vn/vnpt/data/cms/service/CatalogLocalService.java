@@ -144,6 +144,9 @@ public interface CatalogLocalService
 	@Indexable(type = IndexableType.DELETE)
 	public Catalog deleteCatalog(long catalogId) throws PortalException;
 
+	public Catalog deleteCatalog(long catalogId, ServiceContext serviceContext)
+		throws PortalException;
+
 	/**
 	 * @throws PortalException
 	 */
@@ -349,5 +352,11 @@ public interface CatalogLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Catalog updateCatalog(Catalog catalog);
+
+	public Catalog updateCatalog(
+			long catalogId, long userId, String tableName, String title,
+			String description, String version, boolean visibility,
+			ServiceContext serviceContext)
+		throws PortalException;
 
 }
