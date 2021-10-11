@@ -68,31 +68,33 @@ var dataSet = {
     renderDataSetDataTable: function (catalogId, columnSearch) {
         console.log("Get Data catalog " + catalogId + " column size: " + columnSearch.length);
         let instance = this;
-        const catalogGetColumnUrl = config.host + "/o/catalog/get_detail_column?transId=kyzica&channel=cms&catalogId=" + catalogId;
-        $.ajax({
-            type: "GET",
-            url: catalogGetColumnUrl,
-            contentType: "application/json",
-            dataType: "json",
-            success: function (response) {
-                // build search form
-                instance.createFormSearch(response.data.lsColumn);
-                const headers = response.data.lsColumn;
-                const nestedCols = [];
-                headers.forEach(function (item) {
-                    const column = {};
-                    column.name = item.code;
-                    column.title = item.name;
-                    column.data = item.code;
-                    column.searchable = item.isSearch;
-                    nestedCols.push(column);
-                });
-                StorageService.deleteItems("_columns");
-                const key = catalogId + "_columns";
-                StorageService.setItem(key, JSON.stringify(nestedCols));
-                instance._renderDataTable(catalogId, nestedCols, columnSearch);
-            }
-        });
+        const key = catalogId + "_columns";
+        const nestedCols = StorageService.getItem(key);
+        if (nestedCols === null) {
+            const catalogGetColumnUrl = config.host + "/o/catalog/get_detail_column?transId=kyzica&channel=cms&catalogId=" + catalogId;
+            $.ajax({
+                type: "GET",
+                url: catalogGetColumnUrl,
+                contentType: "application/json",
+                dataType: "json",
+                success: function (response) {
+                    // build search form
+                    instance.createFormSearch(response.data.lsColumn);
+                    const headers = response.data.lsColumn;
+                    headers.forEach(function (item) {
+                        const column = {};
+                        column.name = item.code;
+                        column.title = item.name;
+                        column.data = item.code;
+                        column.searchable = item.isSearch;
+                        nestedCols.push(column);
+                    });
+                    StorageService.deleteItems("_columns");
+                    StorageService.setItem(key, JSON.stringify(nestedCols));
+                }
+            });
+        }
+        instance._renderDataTable(catalogId, nestedCols, columnSearch);
         StorageService.deleteItem("catalogId");
         StorageService.setItem("catalogId", catalogId);
     },
@@ -116,13 +118,13 @@ var dataSet = {
             column.values = [];
         }
         dataCfg.columns = columnSearch;
-        $("#catalogSearch").empty();
+        $("#advSearchContainer").empty();
         $("#catalogSearchForm").tmpl(dataCfg).appendTo("#advSearchContainer");
     },
     searchData: function () {
         let instance = this;
         const searchRequest = [];
-        let columns = JSON.parse(localStorage.getItem("columnSearch"));
+        let columns = JSON.parse(StorageService.getItem("columnSearch"));
         columns.forEach(function (e) {
             const columnSearch = {};
             columnSearch.name = e.code;

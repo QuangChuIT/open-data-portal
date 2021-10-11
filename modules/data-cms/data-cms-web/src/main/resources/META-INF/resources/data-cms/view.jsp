@@ -66,23 +66,6 @@
                         </button>
                     </div>
                     <div class="modal-body" id="advSearchContainer">
-
-                    </div>
-                    <div class="modal-footer">
-                        <div class="modal-item-last">
-                            <div class="btn-group">
-                                <div class="btn-group-item">
-                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">
-                                        Close
-                                    </button>
-                                </div>
-                                <div class="btn-group-item">
-                                    <button class="btn btn-primary" type="button">
-                                        Primary
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -108,14 +91,15 @@
             {{/if}}
             </div>
         {{/each}}
-    </form>
-    <div class="row">
-        <button type="button" class="btn btn-primary" onclick="dataSet.searchData()">
+         <div class="form-group">
+            <button type="button" class="btn btn-primary" onclick="dataSet.searchData()">
                 <i class="icon-search"></i> <%=LanguageUtil.get(request, "search")%>
             </button>
 
             <button type="button" class="btn btn-light" onclick="dataSet.clearSearch()">
                 <i class="icon-eraser"></i> <%=LanguageUtil.get(request, "cancel")%>
             </button>
-    </div>
+         </div>
+    </form>
+
 </script>
