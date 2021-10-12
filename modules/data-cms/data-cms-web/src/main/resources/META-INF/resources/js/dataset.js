@@ -16,12 +16,14 @@ var dataSet = {
     _renderDataTable: function (catalogId, columns, columnsSearch) {
         let instance = this;
         const url = config.host + "/o/catalog/get_data_detail?channel=cms&transId=123&catalogId=" + catalogId;
+        const columnsToConfig = JSON.parse(columns);
         instance.appSetting.dataTable = $("#datasetTable").DataTable({
             serverSide: true,
             process: true,
             ajax: {
                 url: url,
                 type: "GET",
+                dataType: 'json',
                 data: {
                     "searchAdv": JSON.stringify(columnsSearch)
                 }
@@ -37,7 +39,7 @@ var dataSet = {
             paging: true,
             info: false,
             //dom: "lrtip",
-            columns: columns,
+            columns: columnsToConfig,
             "columnDefs": [
                 {
                     "searchable": false,
@@ -81,20 +83,24 @@ var dataSet = {
                     // build search form
                     instance.createFormSearch(response.data.lsColumn);
                     const headers = response.data.lsColumn;
+                    const nestedColsNew = [];
                     headers.forEach(function (item) {
                         const column = {};
                         column.name = item.code;
                         column.title = item.name;
                         column.data = item.code;
                         column.searchable = item.isSearch;
-                        nestedCols.push(column);
+                        nestedColsNew.push(column);
                     });
+                    instance._renderDataTable(catalogId, JSON.stringify(nestedColsNew), columnSearch);
                     StorageService.deleteItems("_columns");
-                    StorageService.setItem(key, JSON.stringify(nestedCols));
+                    StorageService.setItem(key, JSON.stringify(nestedColsNew));
                 }
             });
+        } else {
+            instance._renderDataTable(catalogId, nestedCols, columnSearch);
         }
-        instance._renderDataTable(catalogId, nestedCols, columnSearch);
+
         StorageService.deleteItem("catalogId");
         StorageService.setItem("catalogId", catalogId);
     },

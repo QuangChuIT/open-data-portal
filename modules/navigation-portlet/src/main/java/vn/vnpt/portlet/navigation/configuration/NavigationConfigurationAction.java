@@ -33,7 +33,7 @@ public class NavigationConfigurationAction extends DefaultConfigurationAction {
     @Override
     public void include(PortletConfig portletConfig, HttpServletRequest httpServletRequest,
                         HttpServletResponse httpServletResponse) throws Exception {
-        httpServletRequest.setAttribute(NavigationConfigurationAction.class.getName(),
+        httpServletRequest.setAttribute(NavigationConfiguration.class.getName(),
                 _navigationConfiguration);
 
         super.include(portletConfig, httpServletRequest, httpServletResponse);

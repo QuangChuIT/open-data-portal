@@ -38,8 +38,3 @@
         </div>
     </c:otherwise>
 </c:choose>
-<script>
-    $(document).ready(function (){
-       console.log("Hello QuangCV nhe :))))");
-    });
-</script>

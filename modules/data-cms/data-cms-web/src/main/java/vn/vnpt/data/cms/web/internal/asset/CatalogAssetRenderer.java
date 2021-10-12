@@ -173,5 +173,5 @@ public class CatalogAssetRenderer extends BaseJSPAssetRenderer<Catalog> {
 
     private Catalog _catalog;
     private final ModelResourcePermission<Catalog> _catalogModelResourcePermission;
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private final static Logger logger = Logger.getLogger(CatalogAssetRenderer.class.getName());
 }

@@ -111,7 +111,7 @@ public class CmsCatalogInsertCmd extends AbsApiBaseBodyReqTypeCmd {
             }
             _log.info("Save success catalog and catalog field to database !!!!!");
         } else {
-            _log.error("Save fail catalog and catalog field to database !!!!!");
+            _log.error("Save fail catalog and catalog field to database cause " + this.objResponse.getError().getMessage());
         }
         /*this.logToDb();*/
     }

@@ -129,10 +129,11 @@
 <@liferay_util["include"] page=body_bottom_include />
 
 <@liferay_util["include"] page=bottom_include />
-<script src="${javascript_folder}/datatable/jquery.dataTables.min.js"></script>
+
+<#--<script src="${javascript_folder}/datatable/jquery.dataTables.min.js"></script>
 <script src="${javascript_folder}/datatable/dataTables.bootstrap4.min.js"></script>
 <script src="${javascript_folder}/datatable/dataTables.responsive.min.js"></script>
-<script src="${javascript_folder}/datatable/responsive.bootstrap4.min.js"></script>
+<script src="${javascript_folder}/datatable/responsive.bootstrap4.min.js"></script>-->
 </body>
 
 </html>

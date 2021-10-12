@@ -7,9 +7,6 @@ var catalog = {
         const instance = this;
         console.log("init function");
     },
-    sayHello: function () {
-        alert("hello world");
-    },
     _renderTemplateMetaDataTable: function () {
     },
     createCatalog: function (descriptionData) {

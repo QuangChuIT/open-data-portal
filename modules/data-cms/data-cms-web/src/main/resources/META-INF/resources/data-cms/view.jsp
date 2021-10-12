@@ -42,8 +42,14 @@
             <%=catalog.getDescription()%>
         </div>
         <aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="assets-resources">
-            <table id="datasetTable" class="table table-bordered table-hover" style="width:100%">
-            </table>
+            <div class="dataset-area mb-2">
+                <table id="datasetTable" class="table table-bordered table-hover" style="width:100%">
+                    <thead class="dataset-thead" id="dataset-thead">
+                    </thead>
+                    <tbody id="dataset-tbody">
+                    </tbody>
+                </table>
+            </div>
             <div class="download-resource">
                 <button class="btn btn-primary download-data" onclick="catalog.downloadFile(1,<%=catalogId%>)">
                     PDF
@@ -54,7 +60,7 @@
             </div>
         </aui:fieldset>
         <%-- Advance Search --%>
-        <div aria-labelledby="datasetAdvSearch" class="fade modal" id="datasetAdvSearch" role="dialog" tabindex="-1">
+        <%--<div aria-labelledby="datasetAdvSearch" class="fade modal" id="datasetAdvSearch" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-full-screen-sm-down modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -69,7 +75,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--%>
     </c:if>
 </div>
 <script>
@@ -102,4 +108,26 @@
          </div>
     </form>
 
+
+</script>
+
+<script id="datasetTheadTmpl" type="text/x-jQuery-tmpl">
+    <tr>
+        <th scope="col">STT</th>
+        {{each columns}}
+            <th scope="col">${name}</th>
+        {{/each}}
+    </tr>
+
+</script>
+
+<script id="datasetTbodyTmpl" type="text/x-jQuery-tmpl">
+    <tr>
+        {{each items}}
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        {{/each}}
+    </tr>
 </script>
