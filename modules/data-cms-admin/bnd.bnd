@@ -1,6 +1,0 @@
-Bundle-Name: data-cms-admin
-Bundle-SymbolicName: vn.vnpt.data.cms.web
-Bundle-Version: 1.0.0
-Export-Package: vn.vnpt.data.cms.web.constants
-Web-ContextPath: /data-cms-admin
-Include-Resource: package.json
