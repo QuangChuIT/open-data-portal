@@ -12,14 +12,12 @@
 	}
 }
 
-/*
 .modal {
 	display: block;
 	margin: 0;
 	overflow: hidden;
 	position: fixed;
 }
-*/
 
 .modal-body {
 	overflow: auto;
@@ -30,7 +28,7 @@
 	}
 }
 
-/*.modal-dialog {
+.modal-dialog {
 	@include media-breakpoint-up(sm) {
 		max-width: none;
 	}
@@ -42,7 +40,7 @@
 	.yui3-resize-handles-wrapper {
 		pointer-events: all;
 	}
-}*/
+}
 
 .modal-hidden {
 	display: none;

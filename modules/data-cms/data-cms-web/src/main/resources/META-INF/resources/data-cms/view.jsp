@@ -60,12 +60,15 @@
             </div>
         </aui:fieldset>
         <%-- Advance Search --%>
-        <%--<div aria-labelledby="datasetAdvSearch" class="fade modal" id="datasetAdvSearch" role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-full-screen-sm-down modal-dialog-centered">
+        <div aria-labelledby="datasetAdvSearch" class="fade modal" id="datasetAdvSearch"
+             role="dialog" tabindex="-1"
+             aria-hidden="true"
+             style="display: none;">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="modal-title" id="clayDefaultModalLabel">
-                            <%=LanguageUtil.get(request,"advanced-search")%>
+                            <%=LanguageUtil.get(request, "advanced-search")%>
                         </div>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -75,7 +78,7 @@
                     </div>
                 </div>
             </div>
-        </div>--%>
+        </div>
     </c:if>
 </div>
 <script>
@@ -107,27 +110,4 @@
             </button>
          </div>
     </form>
-
-
-</script>
-
-<script id="datasetTheadTmpl" type="text/x-jQuery-tmpl">
-    <tr>
-        <th scope="col">STT</th>
-        {{each columns}}
-            <th scope="col">${name}</th>
-        {{/each}}
-    </tr>
-
-</script>
-
-<script id="datasetTbodyTmpl" type="text/x-jQuery-tmpl">
-    <tr>
-        {{each items}}
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        {{/each}}
-    </tr>
 </script>

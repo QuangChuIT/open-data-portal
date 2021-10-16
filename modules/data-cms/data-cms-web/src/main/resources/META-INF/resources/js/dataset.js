@@ -19,7 +19,7 @@ var dataSet = {
         const columnsToConfig = JSON.parse(columns);
         instance.appSetting.dataTable = $("#datasetTable").DataTable({
             serverSide: true,
-            process: true,
+            processing: true,
             ajax: {
                 url: url,
                 type: "GET",
@@ -81,7 +81,7 @@ var dataSet = {
                 dataType: "json",
                 success: function (response) {
                     // build search form
-                    instance.createFormSearch(response.data.lsColumn);
+                    instance._storeColumnSearch(response.data.lsColumn);
                     const headers = response.data.lsColumn;
                     const nestedColsNew = [];
                     headers.forEach(function (item) {
@@ -110,22 +110,19 @@ var dataSet = {
         }
         return columns.filter(column => column.isSearch === true);
     },
-    createFormSearch: function (columns) {
+    createFormSearch: function () {
+        let instance = this;
+        let columnSearch = JSON.parse(StorageService.getItem("columnSearch"));
+        const dataCfg = {};
+        dataCfg.columns = columnSearch;
+        $("#advSearchContainer").empty();
+        $("#catalogSearchForm").tmpl(dataCfg).appendTo("#advSearchContainer");
+    },
+    _storeColumnSearch: function (columns) {
         let instance = this;
         let columnSearch = instance._filterColumnSearch(columns);
         StorageService.deleteItem("columnSearch");
         StorageService.setItem("columnSearch", JSON.stringify(columnSearch));
-        const lengthColumn = columnSearch.length + 2;
-        let numberRow = Math.ceil(lengthColumn / 4);
-        const dataCfg = {};
-        for (let i = 0; i < numberRow; i++) {
-            const column = {};
-            column.row = i;
-            column.values = [];
-        }
-        dataCfg.columns = columnSearch;
-        $("#advSearchContainer").empty();
-        $("#catalogSearchForm").tmpl(dataCfg).appendTo("#advSearchContainer");
     },
     searchData: function () {
         let instance = this;
@@ -142,7 +139,10 @@ var dataSet = {
             }
         });
         let catalogId = StorageService.getItem("catalogId");
-        instance.renderDataSetDataTable(catalogId, searchRequest);
+        const dtColumnKey = catalogId + "_columns";
+        const columnsDatatable = StorageService.getItem(dtColumnKey);
+        $('#datasetAdvSearch').modal('hide');
+        instance._renderDataTable(catalogId, columnsDatatable, searchRequest);
     },
     clearSearch: function () {
         let instance = this;
@@ -153,8 +153,11 @@ var dataSet = {
             $("#" + e.code).val("");
         });
         instance.renderDataSetDataTable(catalogId, []);
+        $('#datasetAdvSearch').modal('hide');
     },
     openAdvanceSearch: function () {
+        let instance = this;
+        instance.createFormSearch();
         $('#datasetAdvSearch').modal('toggle');
     },
     openUploadData: function () {

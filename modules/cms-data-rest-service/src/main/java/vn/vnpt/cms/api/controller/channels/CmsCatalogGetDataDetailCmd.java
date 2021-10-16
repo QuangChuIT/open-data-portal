@@ -2,15 +2,19 @@ package vn.vnpt.cms.api.controller.channels;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import vn.vnpt.cms.api.cmd.DbCmsCatalogGetDetailColumnCmd;
 import vn.vnpt.cms.api.cmd.DbCmsPageGetDataCmd;
 import vn.vnpt.cms.api.controller.base.AbsApiBaseParamReqTypeCmd;
 import vn.vnpt.cms.api.listener.entities.CmsCatalogSearch;
+import vn.vnpt.cms.api.listener.entities.Column;
 import vn.vnpt.cms.api.listener.entities.datatable.DataTableResult;
 import vn.vnpt.cms.api.listener.entities.datatable.DatatableRequest;
 import vn.vnpt.cms.api.listener.entities.datatable.PaginationCriteria;
 import vn.vnpt.cms.api.listener.response.BaseResp;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CmsCatalogGetDataDetailCmd extends AbsApiBaseParamReqTypeCmd {
     private long catalogId;
@@ -37,7 +41,12 @@ public class CmsCatalogGetDataDetailCmd extends AbsApiBaseParamReqTypeCmd {
         PaginationCriteria pagination = datatableRequest.getPaginationRequest();
         String textSearch = "";
         _log.info("Search ..... " + datatableRequest.getSearch());
-        textSearch = buildSearchQuery(datatableRequest.getSearch());
+        if (searchColumns.length > 0) {
+            textSearch = buildAdvSearchQuery();
+        } else if(!datatableRequest.getSearch().equals("")){
+            textSearch = buildSearchQuery(datatableRequest.getSearch());
+        }
+
         DbCmsPageGetDataCmd dbCmd = new DbCmsPageGetDataCmd(this.transId, this.channel, this.catalogId, textSearch
                 , pagination.getPageNumber(), pagination.getPageSize(), this.orderBy, this.status);
         this.executeDbCmd(dbCmd);
@@ -57,10 +66,9 @@ public class CmsCatalogGetDataDetailCmd extends AbsApiBaseParamReqTypeCmd {
         }
     }
 
-    private String buildSearchQuery(String searchValue) {
-        String query = "";
+    public String buildAdvSearchQuery() {
+        StringBuilder builder = new StringBuilder();
         if (searchColumns.length > 0) {
-            StringBuilder builder = new StringBuilder();
             for (int i = 0; i < searchColumns.length; ++i) {
                 CmsCatalogSearch search = searchColumns[i];
                 String name = search.getName();
@@ -86,10 +94,32 @@ public class CmsCatalogGetDataDetailCmd extends AbsApiBaseParamReqTypeCmd {
                     builder.append("AND ");
                 }
             }
-            query = builder.toString();
         }
-        return query;
+        return builder.toString();
     }
+
+    public String buildSearchQuery(String searchValue) {
+        StringBuilder builder = new StringBuilder();
+        DbCmsCatalogGetDetailColumnCmd dbCmd = new DbCmsCatalogGetDetailColumnCmd(this.transId, this.channel, this.catalogId);
+        this.executeDbCmd(dbCmd);
+        List<Column> columnList = dbCmd.getLsColumn();
+        List<Column> columnsSearch = columnList.stream().filter(Column::isSearch).collect(Collectors.toList());
+
+        for (int i = 0; i < columnsSearch.size(); ++i) {
+            Column column = columnList.get(i);
+            String code = column.getCode();
+            builder.append(code);
+            builder.append(" LIKE '%");
+            builder.append(searchValue);
+            builder.append("%' ");
+            if (i != (columnsSearch.size() - 1)) {
+                builder.append("OR ");
+            }
+        }
+
+        return builder.toString();
+    }
+
 
     private final static Log _log = LogFactoryUtil.getLog(CmsCatalogGetDataDetailCmd.class);
 }

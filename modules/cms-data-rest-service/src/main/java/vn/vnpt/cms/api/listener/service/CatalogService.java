@@ -68,8 +68,6 @@ public class CatalogService extends BaseService {
     @Produces(ContentTypes.APPLICATION_JSON)
     public Response getCatalogData(@QueryParam("channel") String channel, @QueryParam("transId") String transId,
                                    @QueryParam("catalogId") Integer catalogId,@QueryParam("searchAdv") String searchAdv) {
-        _log.info("-----------------------Get Data Active--------------------");
-
         CmsCatalogGetDataDetailCmd cmd = new CmsCatalogGetDataDetailCmd(this.httpServletRequest, channel,
                 transId, catalogId, 1, searchAdv);
         cmd.execute();
